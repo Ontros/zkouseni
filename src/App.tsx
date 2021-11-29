@@ -11,12 +11,11 @@ export type Preset = {
 }
 
 function App() {
-
-
     useEffect(() => {
         console.log("fetch")
         var L19 = `${window.location.href}/presets/rustinka/slovicka-L19.json`
-        fetch(`${window.location.href}/presets/chemie/prvky.json`).then((data) => {
+        const chem = `${window.location.href}/presets/chemie/prvky.json`
+        fetch(L19).then((data) => {
             data.json().then((json) => {
                 setKey(json)
             })
