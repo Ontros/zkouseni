@@ -1,13 +1,20 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
-import { Preset, Key } from './App'
+import { Questionaire, Key } from './App'
 import weightedAverage from './weightedAverage'
 
 type Props = {
-    preset: Preset
+    questionaire: Questionaire
 }
+
+//Otazky a dotazniky
+
 export default function Selection(props: Props) {
     //TODO: multiple words (array)
-    const { preset } = props
+    //Get vars from props
+    const { questionaire } = props
+
+    //Defaultni data pro state
     var getBaseResults = (number: number) => {
         var resultes = []
         for (var i = 0; i < number; i++) {
@@ -15,117 +22,126 @@ export default function Selection(props: Props) {
         }
         return resultes
     }
-    const [resultText, setResultText] = useState("")
-    const [dobre, setDobre] = useState(0)
-    const [spatne, setSpatne] = useState(0)
-    const [odpoved, setOdpoved] = useState("")
-    const [currentKey, setCurrentKey] = useState(0)
-    const [correct, setCorrect] = useState(true)
+
+    //Feedback spravnosti predchozi odpovedi
+    const [feedbackString, setFeedbackString] = useState("")
+    //Pocet spravnych odpovedi
+    const [correctAmount, setCorrectAmount] = useState(0)
+    //Pocet spatnych odpovedi
+    const [wrongAmount, setWrongAmount] = useState(0)
+    //Bool zda byla posledni odpoved dobre
+    const [isCorrect, setIsCorrect] = useState(true)
+    //State pro ukladani textu v odpoved inputu
+    const [answerInputString, setAnswerInputString] = useState("")
+    //Current questionIndex
+    const [questionIndex, setQuestionIndex] = useState(0)
+    //Minimalni mozna otazka
     const [from, setFrom] = useState(1)
-    const [end, setEnd] = useState(preset.keys.length)
-    const [askForNazev, setAskForNazev] = useState(true)
-    const [result, setResult] = useState<number[]>(getBaseResults(preset.keys.length))
-    console.log(preset)
+    //Maximalni mozna otazka
+    const [end, setEnd] = useState(questionaire.keys.length)
+    //Bool zda se pta na 2. item v otazce
+    const [askForSecond, setAskForSecond] = useState(true)
+    //Dotaznik
+    const [questionCorrectnessArray, setQuestionCorrectnessArray] = useState<number[]>(getBaseResults(questionaire.keys.length))
 
-
-    const handleChange = (event: any) => {
-        setOdpoved(event.target.value)
+    //Zmena Answer inputu
+    const changeAnswerInput = (event: any) => {
+        setAnswerInputString(event.target.value)
     }
+
+    //Zmena from inputu
     const changeFrom = (event: any) => {
         setFrom(event.target.value)
-        // if (event.target.value === '') {
-        //     setFrom(event.target.value)
-        // }
-        // else if (event.target.value <= 0) {
-        //     setFrom(1)
-        // }
-        // else if (event.target.value >= end) {
-        //     setFrom(end - 1)
-        // }
-        // else {
-        // }
     }
+
+    //Zmena end inputu
     const changeEnd = (event: any) => {
         setEnd(event.target.value)
-        // if (event.target.value > 118) {
-        //     setEnd(118)
-        // }
-        // else if (event.target.value <= from) {
-        //     setEnd(from + 1)
-        // }
-        // else {
-        // }
     }
-    const changeRadio = (event: any) => {
+
+    //Zmena ask for second vyberu
+    const changeAskForSecond = (event: any) => {
         if (event.target.value === "1")
-            setAskForNazev(true)
+            setAskForSecond(true)
         else
-            setAskForNazev(false)
+            setAskForSecond(false)
     }
+
+    //TODO: maybe move to seperate function
+    //Get quesion and answer
     var question = 'err'
     var answer = 'err'
-    if (askForNazev) {
-        question = preset.keys[currentKey].a
-        answer = preset.keys[currentKey].b
+    if (askForSecond) {
+        question = questionaire.keys[questionIndex].a
+        answer = questionaire.keys[questionIndex].b
 
     }
     else {
-        question = preset.keys[currentKey].b
-        answer = preset.keys[currentKey].a
+        question = questionaire.keys[questionIndex].b
+        answer = questionaire.keys[questionIndex].a
     }
 
+    //TODO: moznost pres mezernik skip na dalsi a treba shift mezernik mezera
+    //Press enter -> skip
     const inputKeyDown = (e: any) => {
         if (e.key === 'Enter') {
-            onClick()
+            moveToNextQuestion()
         }
     }
 
-    const onClick = () => {
-        if (removeDiacritics(odpoved.toLocaleLowerCase()).trim() === removeDiacritics(answer.toLocaleLowerCase()).trim()) {
-            //dobre
-            setCorrect(true)
-            setResultText(`Dobře ${question} (${currentKey + 1}) ${answer}`)
-            var newResult = result
-            newResult[currentKey] += 1
-            setResult(newResult)
-            setDobre(dobre + 1)
+    const moveToNextQuestion = () => {
+
+        //dobre
+        if (removeDiacritics(answerInputString.toLocaleLowerCase()).trim() === removeDiacritics(answer.toLocaleLowerCase()).trim()) {
+            setIsCorrect(true)
+            setFeedbackString(`Dobře ${question} (${questionIndex + 1}) ${answer}`)
+            var newResult = questionCorrectnessArray
+            newResult[questionIndex] += 1
+            setQuestionCorrectnessArray(newResult)
+            setCorrectAmount(correctAmount + 1)
         }
+
+        //spatne
         else {
-            //spatne
-            setCorrect(false)
-            setResultText(`Špatně ${question} (${currentKey + 1}) ${answer}`)
-            var newResult = result
-            newResult[currentKey] -= 1
-            setResult(newResult)
-            setSpatne(spatne + 1)
+            setIsCorrect(false)
+            setFeedbackString(`Špatně ${question} (${questionIndex + 1}) ${answer}`)
+            // eslint-disable-next-line @typescript-eslint/no-redeclare
+            var newResult = questionCorrectnessArray
+            newResult[questionIndex] -= 1
+            setQuestionCorrectnessArray(newResult)
+            setWrongAmount(wrongAmount + 1)
         }
-        setOdpoved("")
+
+        //Reset answerInputString
+        setAnswerInputString("")
+
+        //Get new question
         //@ts-expect-error
-        var index = randomIndexOfArray(from, end, result, preset)
+        var index = randomIndexOfArray(from, end, questionCorrectnessArray, questionaire)
         if (index === null) {
             console.log('no index')
             chyba('58')
             return
         }
-        setCurrentKey(index)
+        setQuestionIndex(index)
     }
-    //(${currentKey + 1}) 
+
     return (
         <div className="App App-header">
             <div className="container">
-                <div className="zadani">{`${capitalizeFirst(question)} ${result[currentKey]}`}</div>
-                <input className="text-input" type="text" value={odpoved} onKeyDown={inputKeyDown} onChange={handleChange} />
+                <div className="zadani">{`${capitalizeFirst(question)} ${questionCorrectnessArray[questionIndex]}`}</div>
+                <input className="text-input" type="text" value={answerInputString} onKeyDown={inputKeyDown} onChange={changeAnswerInput} />
                 <div className="bottom-container">
-                    <button className="confirm" onClick={onClick}>Potvrdit</button>
-                    <div className={`result-text correctness-${correct}`} >{resultText}</div>
+                    <button className="confirm" onClick={moveToNextQuestion}>Potvrdit</button>
+                    <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
                 <div className="from-to">
                     <input type="number" className="num-selection" value={from} onChange={changeFrom} />
                     <input type="number" className="num-selection" value={end} onChange={changeEnd} />
                 </div>
-                <div onChange={changeRadio} className="radioContainer">
-                    <input type="radio" value="1" name="quest" className="radio" /> {preset.key1}
-                    <input type="radio" value="2" name="quest" className="radio" /> {preset.key2}
+                <div onChange={changeAskForSecond} className="radioContainer">
+                    <input type="radio" value="1" name="quest" className="radio" /> {questionaire.key1}
+                    <input type="radio" value="2" name="quest" className="radio" /> {questionaire.key2}
                 </div>
             </div>
         </div>
@@ -164,18 +180,6 @@ function randomIndexOfArray(minS: string, maxS: string, result: number[], key: K
     var number = weightedAverage(createWeights(min, max, result, key))
     return number
 }
-
-// function randomIndexOfArray(minS: string, maxS: string) {
-//     var min = parseInt(minS) - 1
-//     var max = parseInt(maxS) - 1
-//     if (min < 0 || max > 117 || min >= max) {
-//         alert("Chyba výběru")
-//         return 0
-//     }
-
-//     var number = Math.floor(Math.random() * (max - min)) + min
-//     return number
-// }
 
 function capitalizeFirst(str: string) {
     return str[0].toUpperCase() + str.slice(1)
@@ -279,7 +283,6 @@ for (var i = 0; i < defaultDiacriticsRemovalMap.length; i++) {
     }
 }
 
-// "what?" version ... http://jsperf.com/diacritics/12
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function removeDiacritics(str: string) {
     // eslint-disable-next-line no-control-regex
@@ -289,7 +292,7 @@ function removeDiacritics(str: string) {
     });
 }
 
-
+//Alert api (extremne slozite ;)
 var chyba = (code: string) => {
-    alert(`Onřej to zase posral, tohle by mu snad mělo pomoct opravit tento problém: ${code}`)
+    alert(`Ondřej to zase posral, tohle by mu snad mělo pomoct opravit tento problém: ${code}`)
 }

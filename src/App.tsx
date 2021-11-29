@@ -1,10 +1,11 @@
 /* eslint-disable @typescript-eslint/no-redeclare */
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useEffect, useState } from 'react';
 import './App.css';
 import Loading from './Loading';
 import Selection from './Selection';
 
-export type Preset = {
+export type Questionaire = {
     key1: string,
     key2: string,
     keys: Key
@@ -22,9 +23,9 @@ function App() {
         })
     }, [])
 
-    const [key, setKey] = useState<Preset>({ key1: "error", key2: "error", keys: [] })
+    const [key, setKey] = useState<Questionaire>({ key1: "error", key2: "error", keys: [] })
 
-    return key.key1 !== "error" ? <Selection preset={key} /> : <Loading />
+    return key.key1 !== "error" ? <Selection questionaire={key} /> : <Loading />
 }
 export type Key = { a: string, b: string }[]
 
