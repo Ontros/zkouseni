@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
 import { Questionaire, Key } from './App'
+import Settings from './Settings'
 import weightedAverage from './weightedAverage'
 
 type Props = {
@@ -135,14 +136,7 @@ export default function Selection(props: Props) {
                     <button className="confirm" onClick={moveToNextQuestion}>Potvrdit</button>
                     <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
-                <div className="from-to">
-                    <input type="number" className="num-selection" value={from} onChange={changeFrom} />
-                    <input type="number" className="num-selection" value={end} onChange={changeEnd} />
-                </div>
-                <div onChange={changeAskForSecond} className="radioContainer">
-                    <input type="radio" value="1" name="quest" className="radio" /> {questionaire.key1}
-                    <input type="radio" value="2" name="quest" className="radio" /> {questionaire.key2}
-                </div>
+                <Settings from={from} end={end} changeFrom={changeFrom} changeEnd={changeEnd} changeAskForSecond={changeAskForSecond} questionaire={questionaire} />
             </div>
         </div>
     );

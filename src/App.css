@@ -2,7 +2,6 @@
   text-align: center;
 }
 
-
 .App-header {
   background-color: #282c34;
   min-height: 100vh;
@@ -40,10 +39,12 @@
   font-size: calc(20px + 2vmin);
   padding: calc(1px + 1vmin);
 }
+
 .confirm:hover{
   cursor: pointer;
   background-color: #515358;
 }
+
 .confirm:active {
   background-color: #35373a;
 }
@@ -88,4 +89,45 @@
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
+}
+
+.settings-opener {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  text-align: left;
+  cursor: pointer;
+  width: 100%;
+  margin-top: calc(5px + 1.5vmin);
+  user-select: none;
+}
+
+.settings-opener-open {
+  background-color: #515358;
+
+}
+
+.settings-opener-closed {
+
+  background-color: #6e7074;
+}
+
+.triangle-css {
+  /* width: calc(20px+2vmin);
+  height: calc(20px+2vmin); */
+  margin-right: calc(5px + 1.5vmin);
+  height: 80%;
+  height: 50px;
+  aspect-ratio: 1;
+  border: 0;
+  background-color: #515358;
+}
+
+
+.triangle-open {
+  
+}
+
+.triangle-closed {
+  
 }
