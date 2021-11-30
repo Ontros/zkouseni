@@ -103,31 +103,52 @@
 }
 
 .settings-opener-open {
-  background-color: #515358;
-
+  /* background-color: #515358; */
 }
 
 .settings-opener-closed {
-
-  background-color: #6e7074;
+  /* background-color: #6e7074; */
 }
 
 .triangle-css {
-  /* width: calc(20px+2vmin);
-  height: calc(20px+2vmin); */
-  margin-right: calc(5px + 1.5vmin);
-  height: 80%;
-  height: 50px;
-  aspect-ratio: 1;
-  border: 0;
-  background-color: #515358;
+  /* margin-right: calc(5px + 1.5vmin); */
+  height: 0;
+  width: 0;
+  /* margin-left: calc(5px + 1.5vmin); */
 }
 
 
 .triangle-open {
-  
+  margin: 10px;
+  margin-right: 0;
+  border-right: 30px solid transparent;
+  border-left: 30px solid transparent;
+
+  /* border-top: 30px solid #6e7074;
+  border-bottom: 30px solid #6e7074; */
+  border-top: 40px solid #6e7074;
 }
 
 .triangle-closed {
-  
+  margin-right: 30px;
+  /* border-color: #6e7074; */
+  border-top: 30px solid transparent;
+  border-bottom: 30px solid transparent;
+
+  /* border-top: 30px solid #6e7074;
+  border-bottom: 30px solid #6e7074; */
+  border-left: 40px solid #6e7074;
 }
+
+.settings-container {
+  position: absolute;
+  /* left: 50vw;
+  transform: translate(0,-50vw); */
+}
+
+.settings-container-main {
+  /* display: flex; align-items: flex-start;
+  justify-content: flex-start; */
+}
+
+/* asi predelat na popup, unlucky */
