@@ -21,13 +21,13 @@ export default function Settings(props: Props) {
 
     return (
 
-        <div className={'settings-container-main'}>
-            <CSSTransition
-                in={areSettingsOpen}
-                unmountOnExit
-                timeout={500}
-                classNames="settings-container-main"
-            >
+        <CSSTransition
+            in={areSettingsOpen}
+            unmountOnExit
+            timeout={5000}
+            classNames="settings-container-main"
+        >
+            <div className={'settings-container-main'}>
                 <div className={'settings-container'} style={{ display: "inline" }}>
                     <div className="settings-close-row">
                         <Close className={"close"} onClick={(event: any) => {
@@ -43,8 +43,8 @@ export default function Settings(props: Props) {
                         <input type="radio" value="2" name="quest" className="radio" /> {questionaire.key2}
                     </div>
                 </div >
-            </CSSTransition>
-        </div>
+            </div>
+        </CSSTransition>
     )
 }
 // <Transition
@@ -62,3 +62,6 @@ export default function Settings(props: Props) {
 {/* <div className={'settings-container-main'}> */ }
 {/* <button className={`button`} onClick={onOpenerClick}>{`⚙️`}</button> */ }
 {/* </div> */ }
+
+//cubic-bezier(.69,-0.01,.51,1.35)
+//0.5s cubic-bezier(.31,0,.44,1.37)

@@ -4,6 +4,12 @@
   --dark3: #35373a;
   --dark4: #515358;
   --dark5: #6e7074;
+  --popup-bezier: cubic-bezier(.42,.12,.38,1.37);
+}
+
+html {
+  overflow: hidden;
+  height: 100%;
 }
 
 .App {
@@ -130,21 +136,32 @@
 
 .settings-container-main-enter {
   position: absolute;
-  transform: translateY(-110vh);
+  opacity: 0;
+  top: 100vh;
+  /* transform: translate(-50%,calc(-50%-110vh)); */
+  /* transform: translateY(-110vh); */
+  /* transform: translateY(calc(-50%-110vh)); */
 }
 
 .settings-container-main-enter-active {
-  transform: translateY(0);
-  transition: all 5000ms ease-in;
+  /* transform: translate(-50%,-50%); */
+  /* transform: translateY(0); */
+  /* transform: translateY(-50%); */
+  opacity: 1;
+  top:50vh;
+  transition: all 500ms var(--popup-bezier);
 }
 
 .settings-container-main-exit {
   position: absolute;
+  top: 50vh;
 }
 
 .settings-container-main-exit-active {
-  transform: translateY(-110vh);
-  transition: all 5000ms ease-in;
+  /* transform: translateY(-110vh); */
+  opacity: 0;
+  top: 100vh;
+  transition: all 500ms var(--popup-bezier);
 }
 
 .settings-close-row {
