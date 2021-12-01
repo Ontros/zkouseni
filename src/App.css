@@ -1,9 +1,17 @@
+:root {
+  --dark1: #0d0e0f;
+  --dark2: #282c34;
+  --dark3: #35373a;
+  --dark4: #515358;
+  --dark5: #6e7074;
+}
+
 .App {
   text-align: center;
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: var(--dark2);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -26,27 +34,27 @@
 }
 
 .text-input {
-  background-color: #6e7074;
+  background-color: var(--dark5);
   border: 0;
   border-radius: 10px;
   font-size: calc(20px + 2vmin);
 }
 
-.confirm {
+.button {
   border: 0;
   border-radius: 10px;
-  background-color: #6e7074;
+  background-color: var(--dark5);
   font-size: calc(20px + 2vmin);
   padding: calc(1px + 1vmin);
 }
 
-.confirm:hover{
+.button:hover{
   cursor: pointer;
-  background-color: #515358;
+  background-color: var(--dark4);
 }
 
-.confirm:active {
-  background-color: #35373a;
+.button:active {
+  background-color: var(--dark3);
 }
 
 .bottom-container {
@@ -76,7 +84,7 @@
 }
 
 .num-selection {
-  background-color: #6e7074;
+  background-color: var(--dark5);
   border: none;
   margin: calc(5px + 1.5vmin);
   max-width: 40%;
@@ -91,64 +99,51 @@
   justify-content: space-around;
 }
 
-.settings-opener {
-  display: flex;
+.first-row {
+  display:flex;
   align-items: center;
-  justify-content: flex-start;
-  text-align: left;
-  cursor: pointer;
-  width: 100%;
-  margin-top: calc(5px + 1.5vmin);
-  user-select: none;
+  justify-content: space-between;
 }
 
-.settings-opener-open {
-  /* background-color: #515358; */
-}
-
-.settings-opener-closed {
-  /* background-color: #6e7074; */
-}
-
-.triangle-css {
-  /* margin-right: calc(5px + 1.5vmin); */
-  height: 0;
-  width: 0;
-  /* margin-left: calc(5px + 1.5vmin); */
-}
-
-
-.triangle-open {
-  margin: 10px;
-  margin-right: 0;
-  border-right: 30px solid transparent;
-  border-left: 30px solid transparent;
-
-  /* border-top: 30px solid #6e7074;
-  border-bottom: 30px solid #6e7074; */
-  border-top: 40px solid #6e7074;
-}
-
-.triangle-closed {
-  margin-right: 30px;
-  /* border-color: #6e7074; */
-  border-top: 30px solid transparent;
-  border-bottom: 30px solid transparent;
-
-  /* border-top: 30px solid #6e7074;
-  border-bottom: 30px solid #6e7074; */
-  border-left: 40px solid #6e7074;
-}
-
-.settings-container {
-  position: absolute;
-  /* left: 50vw;
-  transform: translate(0,-50vw); */
+.button-clear {
+  background-color: var(--dark2);
 }
 
 .settings-container-main {
-  /* display: flex; align-items: flex-start;
-  justify-content: flex-start; */
+  position: absolute;
+  /* left:0;
+  top:0;
+  right: 0;
+  bottom: 0;
+  margin: auto; */
+  left:50vw;
+  top: 50vh;
+  /* transform: translate(-50vw,-50vh); */
+  transform: translate(-50%,-50%);
+  margin: 0;
+  background-color: var(--dark1);
+  padding-top: 50px;
+  padding-bottom: 50px;
+  border-radius: 22px;
+  opacity: 0.95;
 }
 
-/* asi predelat na popup, unlucky */
+.settings-close-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 50px;
+}
+
+.close {
+  width: 50px;
+  height: 50px;
+  cursor: pointer;
+  fill:white;
+  opacity: 0.85;
+}
+
+.close:hover {
+  /* fill: #6e7074; */
+  opacity: 0.6;
+}

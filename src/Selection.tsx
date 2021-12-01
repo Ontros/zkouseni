@@ -44,6 +44,8 @@ export default function Selection(props: Props) {
     const [askForSecond, setAskForSecond] = useState(true)
     //Dotaznik
     const [questionCorrectnessArray, setQuestionCorrectnessArray] = useState<number[]>(getBaseResults(questionaire.keys.length))
+    //Are settings open?
+    const [areSettingsOpen, setAreSettingsOpen] = useState(false)
 
     //Zmena Answer inputu
     const changeAnswerInput = (event: any) => {
@@ -127,16 +129,24 @@ export default function Selection(props: Props) {
         setQuestionIndex(index)
     }
 
+    var onOpenerClick = (event: any) => {
+        setAreSettingsOpen(!areSettingsOpen)
+    }
+
+    console.log(areSettingsOpen)
     return (
         <div className="App App-header">
             <div className="container">
-                <div className="zadani">{`${capitalizeFirst(question)} ${questionCorrectnessArray[questionIndex]}`}</div>
+                <div className="first-row">
+                    <div className="zadani">{`${capitalizeFirst(question)} ${questionCorrectnessArray[questionIndex]}`}</div>
+                    <button className={`button button-clear`} onClick={onOpenerClick}>{`⚙️`}</button>
+                </div>
                 <input className="text-input" type="text" value={answerInputString} onKeyDown={inputKeyDown} onChange={changeAnswerInput} />
                 <div className="bottom-container">
-                    <button className="confirm" onClick={moveToNextQuestion}>Potvrdit</button>
+                    <button className="button" onClick={moveToNextQuestion}>Potvrdit</button>
                     <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
-                <Settings from={from} end={end} changeFrom={changeFrom} changeEnd={changeEnd} changeAskForSecond={changeAskForSecond} questionaire={questionaire} />
+                <Settings from={from} areSettingsOpen={areSettingsOpen} end={end} changeFrom={changeFrom} changeEnd={changeEnd} changeAskForSecond={changeAskForSecond} questionaire={questionaire} />
             </div>
         </div>
     );

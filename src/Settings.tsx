@@ -1,31 +1,25 @@
 import React, { useState } from 'react'
 import { Questionaire, Key } from './App'
+import { ReactComponent as Close } from './close.svg'
 type Props = {
     from: number,
     end: number,
     changeFrom: (event: any) => void,
     changeEnd: (event: any) => void,
     changeAskForSecond: (event: any) => void,
-    questionaire: Questionaire
+    questionaire: Questionaire,
+    areSettingsOpen: boolean
 }
 
 export default function Settings(props: Props) {
 
-    const { from, end, changeFrom, changeEnd, changeAskForSecond, questionaire } = props
+    const { from, end, changeFrom, changeEnd, changeAskForSecond, questionaire, areSettingsOpen } = props
 
-    const [isOpen, setIsOpen] = useState(false);
-
-    var onOpenerClick = (event: any) => {
-        setIsOpen(!isOpen)
-    }
 
     return (
         <div className={'settings-container-main'}>
-            <div className={`settings-opener settings-opener-${isOpen ? 'open' : 'closed'}`} onClick={onOpenerClick}>
-                <div className={`triangle-css triangle-${isOpen ? 'open' : 'closed'}`} ></div>
-                {`Nastavení`}
-            </div>
-            <div className={'settings-container'} style={{ display: isOpen ? "inline" : "none" }}>
+            <div className={'settings-container'} style={{ display: "inline" }}>
+                <div className="settings-close-row"><Close className={"close"} /></div>
                 <div className="from-to">
                     <input type="number" className="num-selection" value={from} onChange={changeFrom} />
                     <input type="number" className="num-selection" value={end} onChange={changeEnd} />
@@ -35,6 +29,22 @@ export default function Settings(props: Props) {
                     <input type="radio" value="2" name="quest" className="radio" /> {questionaire.key2}
                 </div>
             </div >
+
         </div>
     )
 }
+// <Transition
+//     native
+//     items={areSettingsOpen}
+//     from={{ opacity: 1 }}
+//     enter={{ opacity: 1 }}
+//     leave={{ opacity: 1 }}
+
+// >
+//     {show => show && ((springProps: any) => (
+// ))}
+// </Transition>
+
+{/* <div className={'settings-container-main'}> */ }
+{/* <button className={`button`} onClick={onOpenerClick}>{`⚙️`}</button> */ }
+{/* </div> */ }
