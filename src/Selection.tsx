@@ -146,7 +146,12 @@ export default function Selection(props: Props) {
                     <button className="button" onClick={moveToNextQuestion}>Potvrdit</button>
                     <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
-                <Settings from={from} areSettingsOpen={areSettingsOpen} end={end} changeFrom={changeFrom} changeEnd={changeEnd} changeAskForSecond={changeAskForSecond} questionaire={questionaire} />
+                <Settings from={from} areSettingsOpen={areSettingsOpen} setAreSettingsOpen={setAreSettingsOpen}
+                    end={end}
+                    changeFrom={changeFrom}
+                    changeEnd={changeEnd}
+                    changeAskForSecond={changeAskForSecond}
+                    questionaire={questionaire} />
             </div>
         </div>
     );

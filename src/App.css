@@ -128,6 +128,25 @@
   opacity: 0.95;
 }
 
+.settings-container-main-enter {
+  position: absolute;
+  transform: translateY(-110vh);
+}
+
+.settings-container-main-enter-active {
+  transform: translateY(0);
+  transition: all 5000ms ease-in;
+}
+
+.settings-container-main-exit {
+  position: absolute;
+}
+
+.settings-container-main-exit-active {
+  transform: translateY(-110vh);
+  transition: all 5000ms ease-in;
+}
+
 .settings-close-row {
   display: flex;
   align-items: center;
