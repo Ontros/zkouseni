@@ -11,21 +11,33 @@ export type Questionaire = {
     keys: Key
 }
 
+function loadKeys(path: string, setKey: (arg0: Questionaire) => void) {
+    fetch(path).then((data) => {
+        data.json().then((json) => {
+            setKey(json)
+        })
+    })
+
+}
+
 function App() {
     useEffect(() => {
-        console.log("fetch")
-        var L19 = `${window.location.href}/presets/rustinka/slovicka-L19.json`
-        const chem = `${window.location.href}/presets/chemie/prvky.json`
-        fetch(L19).then((data) => {
-            data.json().then((json) => {
-                setKey(json)
+
+        fetch('https://raw.githubusercontent.com/Ontros/zkouseni-keys/main/default.txt').then(response => {
+            response.text().then((url: string) => {
+                loadKeys(url, setKey);
             })
         })
     }, [])
 
+    const updateKeys = (path: string) => {
+        loadKeys(path, setKey)
+    }
+
+    //Answer keys
     const [key, setKey] = useState<Questionaire>({ key1: "error", key2: "error", keys: [] })
 
-    return key.key1 !== "error" ? <Selection questionaire={key} /> : <Loading />
+    return key.key1 !== "error" ? <Selection questionaire={key} loadKeys={updateKeys} /> : <Loading />
 }
 export type Key = { a: string, b: string }[]
 

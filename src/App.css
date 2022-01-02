@@ -1,3 +1,4 @@
+/*----------------------------------General things----------------------------------*/
 :root {
   --dark1: #0d0e0f;
   --dark2: #282c34;
@@ -14,44 +15,32 @@ html {
 
 .App {
   text-align: center;
-}
-
-.App-header {
   background-color: var(--dark2);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(20px + 2vmin);
+  font-size: 35px;
   color: white;
 }
 
-.container {
-  display: flex;
-  flex-direction: column;
-  margin-left: 100px;
-  margin-right: 100px;
-  max-width: 80%;
-}
-
-.zadani {
-  text-align: left;
-}
+/*----------------------------------General classes----------------------------------*/
 
 .text-input {
   background-color: var(--dark5);
   border: 0;
-  border-radius: 10px;
-  font-size: calc(20px + 2vmin);
+  border-radius: .3em;
+  font-size: 1em;
 }
 
 .button {
   border: 0;
-  border-radius: 10px;
+  border-radius: .35em;
   background-color: var(--dark5);
-  font-size: calc(20px + 2vmin);
-  padding: calc(1px + 1vmin);
+  font-size: 1em;
+  padding: .25em;
+  user-select: none;
 }
 
 .button:hover{
@@ -63,8 +52,36 @@ html {
   background-color: var(--dark3);
 }
 
+.button-clear {
+  background-color: var(--dark2);
+}
+
+/*----------------------------------Helper classes----------------------------------*/
+
+.space-between {
+  justify-content: space-between;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+/*----------------------------------Main page----------------------------------*/
+
+.container {
+  display: flex;
+  flex-direction: column;
+  margin-left: 3em;
+  margin-right: 3em;
+  max-width: 80%;
+}
+
+.zadani {
+  text-align: left;
+}
+
 .bottom-container {
-  margin-top: calc(5px + 1.5vmin);
+  margin-top: .4em;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -72,7 +89,7 @@ html {
 }
 
 .result-text {
-  margin-left: calc(5px + 1.5vmin);
+  margin-left: .4em;
   white-space: initial;
 }
 
@@ -84,18 +101,46 @@ html {
   color: red;
 }
 
+.first-row {
+  display:flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/*----------------------------------Settings page----------------------------------*/
+
+.close {
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+  fill:white;
+  opacity: 0.85;
+}
+
+.close:hover {
+  opacity: 0.6;
+}
+
 .from-to {
   display: flex;
   flex-direction: row;
+  max-width: initial;
+  width: 50%;
 }
 
 .num-selection {
   background-color: var(--dark5);
   border: none;
-  margin: calc(5px + 1.5vmin);
-  max-width: 40%;
-  font-size: calc(20px + 2vmin);
+  margin: .4em;
+  width: 4em;
+  flex-grow: 1;
+  font-size: 1em;
   border-radius: 10px;
+}
+
+.text-input-title {
+  font-size: 1.1em;
+  text-align: left;
 }
 
 .radioContainer {
@@ -103,51 +148,31 @@ html {
   flex-direction: row;
   align-items: center;
   justify-content: space-around;
-}
-
-.first-row {
-  display:flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.button-clear {
-  background-color: var(--dark2);
+  width: 50%;
 }
 
 .settings-container-main {
   position: absolute;
-  /* left:0;
-  top:0;
-  right: 0;
-  bottom: 0;
-  margin: auto; */
   left:50vw;
   top: 50vh;
-  /* transform: translate(-50vw,-50vh); */
   transform: translate(-50%,-50%);
   margin: 0;
   background-color: var(--dark1);
-  padding-top: 50px;
-  padding-bottom: 50px;
-  border-radius: 22px;
+  padding: 1.3em;
+  width: 20em;
+  border-radius: .8em;
   opacity: 0.95;
 }
 
+/*----------------------------------settins animaiton----------------------------------*/
 .settings-container-main-enter {
   position: absolute;
   opacity: 0;
   top: 100vh;
-  /* transform: translate(-50%,calc(-50%-110vh)); */
-  /* transform: translateY(-110vh); */
-  /* transform: translateY(calc(-50%-110vh)); */
 }
 
 .settings-container-main-enter-active {
-  /* transform: translate(-50%,-50%); */
-  /* transform: translateY(0); */
-  /* transform: translateY(-50%); */
-  opacity: 1;
+  opacity: 0.95;
   top:50vh;
   transition: all 500ms var(--popup-bezier);
 }
@@ -158,7 +183,6 @@ html {
 }
 
 .settings-container-main-exit-active {
-  /* transform: translateY(-110vh); */
   opacity: 0;
   top: 100vh;
   transition: all 500ms var(--popup-bezier);
@@ -168,18 +192,10 @@ html {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  padding-right: 50px;
 }
 
-.close {
-  width: 50px;
-  height: 50px;
-  cursor: pointer;
-  fill:white;
-  opacity: 0.85;
-}
-
-.close:hover {
-  /* fill: #6e7074; */
-  opacity: 0.6;
+.settings-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
 }

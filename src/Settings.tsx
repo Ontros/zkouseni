@@ -11,20 +11,31 @@ type Props = {
     changeAskForSecond: (event: any) => void,
     questionaire: Questionaire,
     areSettingsOpen: boolean,
-    setAreSettingsOpen: (arg0: boolean) => void
+    setAreSettingsOpen: (arg0: boolean) => void,
+    loadKeys: (arg0: string) => void
 }
 
 export default function Settings(props: Props) {
 
-    const { from, end, changeFrom, changeEnd, changeAskForSecond, questionaire, areSettingsOpen, setAreSettingsOpen } = props
+    const { from, end, changeFrom, changeEnd, changeAskForSecond, questionaire, areSettingsOpen, setAreSettingsOpen, loadKeys } = props
 
+    const [keyPath, setKeyPath] = useState('')
+
+    const inputKeyDown = (e: any) => {
+        if (e.key === 'Enter') {
+            loadKeys(keyPath)
+        }
+    }
+
+    const changeKeyPath = (event: any) => {
+        setKeyPath(event.target.value)
+    }
 
     return (
-
         <CSSTransition
             in={areSettingsOpen}
             unmountOnExit
-            timeout={5000}
+            timeout={500}
             classNames="settings-container-main"
         >
             <div className={'settings-container-main'}>
@@ -34,34 +45,26 @@ export default function Settings(props: Props) {
                             setAreSettingsOpen(!areSettingsOpen)
                         }} />
                     </div>
-                    <div className="from-to">
-                        <input type="number" className="num-selection" value={from} onChange={changeFrom} />
-                        <input type="number" className="num-selection" value={end} onChange={changeEnd} />
+                    <div className="text-input-title">Url of Key JSON:</div>
+                    <div className="settings-row space-between">
+                        {/* Key Path Input */}
+                        <input className="text-input flex-grow" type="text" value={keyPath} onKeyDown={inputKeyDown} onChange={changeKeyPath} />
+                        <div className="button" style={{ margin: '.2em 0 .2em 1em', marginRight: 0 }} onClick={() => {
+                            loadKeys(keyPath)
+                        }}>Confirm</div>
                     </div>
-                    <div onChange={changeAskForSecond} className="radioContainer">
-                        <input type="radio" value="1" name="quest" className="radio" /> {questionaire.key1}
-                        <input type="radio" value="2" name="quest" className="radio" /> {questionaire.key2}
+                    <div className="settings-row space-between">
+                        <div className="from-to">
+                            <input type="number" className="num-selection" value={from} onChange={changeFrom} />
+                            <input type="number" className="num-selection" value={end} onChange={changeEnd} />
+                        </div>
+                        <div onChange={changeAskForSecond} className="radioContainer">
+                            <input type="radio" value="1" name="quest" className="radio" /> {questionaire.key1}
+                            <input type="radio" value="2" name="quest" className="radio" /> {questionaire.key2}
+                        </div>
                     </div>
                 </div >
             </div>
         </CSSTransition>
     )
 }
-// <Transition
-//     native
-//     items={areSettingsOpen}
-//     from={{ opacity: 1 }}
-//     enter={{ opacity: 1 }}
-//     leave={{ opacity: 1 }}
-
-// >
-//     {show => show && ((springProps: any) => (
-// ))}
-// </Transition>
-
-{/* <div className={'settings-container-main'}> */ }
-{/* <button className={`button`} onClick={onOpenerClick}>{`⚙️`}</button> */ }
-{/* </div> */ }
-
-//cubic-bezier(.69,-0.01,.51,1.35)
-//0.5s cubic-bezier(.31,0,.44,1.37)

@@ -5,7 +5,8 @@ import Settings from './Settings'
 import weightedAverage from './weightedAverage'
 
 type Props = {
-    questionaire: Questionaire
+    questionaire: Questionaire;
+    loadKeys: (arg0: string) => void;
 }
 
 //Otazky a dotazniky
@@ -13,7 +14,7 @@ type Props = {
 export default function Selection(props: Props) {
     //TODO: multiple words (array)
     //Get vars from props
-    const { questionaire } = props
+    const { questionaire, loadKeys } = props
 
     //Defaultni data pro state
     var getBaseResults = (number: number) => {
@@ -47,22 +48,22 @@ export default function Selection(props: Props) {
     //Are settings open?
     const [areSettingsOpen, setAreSettingsOpen] = useState(false)
 
-    //Zmena Answer inputu
+    //Write event in Answer input
     const changeAnswerInput = (event: any) => {
         setAnswerInputString(event.target.value)
     }
 
-    //Zmena from inputu
+    //Write event in from input
     const changeFrom = (event: any) => {
         setFrom(event.target.value)
     }
 
-    //Zmena end inputu
+    //Write event in end input
     const changeEnd = (event: any) => {
         setEnd(event.target.value)
     }
 
-    //Zmena ask for second vyberu
+    //Change in ask for second
     const changeAskForSecond = (event: any) => {
         if (event.target.value === "1")
             setAskForSecond(true)
@@ -84,9 +85,9 @@ export default function Selection(props: Props) {
         answer = questionaire.keys[questionIndex].a
     }
 
-    //TODO: moznost pres mezernik skip na dalsi a treba shift mezernik mezera
-    //Press enter -> skip
+    //Keyboard skipping
     const inputKeyDown = (e: any) => {
+        //TODO: choices (space to skip, space+shift to skip)
         if (e.key === 'Enter') {
             moveToNextQuestion()
         }
@@ -94,7 +95,7 @@ export default function Selection(props: Props) {
 
     const moveToNextQuestion = () => {
 
-        //dobre
+        //correct
         if (removeDiacritics(answerInputString.toLocaleLowerCase()).trim() === removeDiacritics(answer.toLocaleLowerCase()).trim()) {
             setIsCorrect(true)
             setFeedbackString(`Dobře ${question} (${questionIndex + 1}) ${answer}`)
@@ -104,7 +105,7 @@ export default function Selection(props: Props) {
             setCorrectAmount(correctAmount + 1)
         }
 
-        //spatne
+        //wrong
         else {
             setIsCorrect(false)
             setFeedbackString(`Špatně ${question} (${questionIndex + 1}) ${answer}`)
@@ -135,7 +136,7 @@ export default function Selection(props: Props) {
 
     console.log(areSettingsOpen)
     return (
-        <div className="App App-header">
+        <div className="App">
             <div className="container">
                 <div className="first-row">
                     <div className="zadani">{`${capitalizeFirst(question)} ${questionCorrectnessArray[questionIndex]}`}</div>
@@ -143,7 +144,7 @@ export default function Selection(props: Props) {
                 </div>
                 <input className="text-input" type="text" value={answerInputString} onKeyDown={inputKeyDown} onChange={changeAnswerInput} />
                 <div className="bottom-container">
-                    <button className="button" onClick={moveToNextQuestion}>Potvrdit</button>
+                    <button className="button" onClick={moveToNextQuestion} >Potvrdit</button>
                     <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
                 <Settings from={from} areSettingsOpen={areSettingsOpen} setAreSettingsOpen={setAreSettingsOpen}
@@ -151,12 +152,14 @@ export default function Selection(props: Props) {
                     changeFrom={changeFrom}
                     changeEnd={changeEnd}
                     changeAskForSecond={changeAskForSecond}
-                    questionaire={questionaire} />
+                    questionaire={questionaire}
+                    loadKeys={loadKeys} />
             </div>
         </div>
     );
 }
 
+//Helper functions:
 function randomItemOfArray(array: any[]) {
     return array[Math.floor(Math.random() * array.length)]
 }
@@ -193,7 +196,7 @@ function randomIndexOfArray(minS: string, maxS: string, result: number[], key: K
 function capitalizeFirst(str: string) {
     return str[0].toUpperCase() + str.slice(1)
 }
-//stack overflox yoinkadge
+
 var defaultDiacriticsRemovalMap = [
     { 'base': 'A', 'letters': '\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F' },
     { 'base': 'AA', 'letters': '\uA732' },
@@ -301,7 +304,7 @@ function removeDiacritics(str: string) {
     });
 }
 
-//Alert api (extremne slozite ;)
+//Alert api (extremly complex ;)
 var chyba = (code: string) => {
     alert(`Ondřej to zase posral, tohle by mu snad mělo pomoct opravit tento problém: ${code}`)
 }
