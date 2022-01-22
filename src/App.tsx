@@ -15,6 +15,7 @@ function loadKeys(path: string, setKey: (arg0: Questionaire) => void) {
     fetch(path).then((data) => {
         data.json().then((json) => {
             setKey(json)
+            localStorage.setItem('keyUrl', path)
         })
     })
 
@@ -22,12 +23,17 @@ function loadKeys(path: string, setKey: (arg0: Questionaire) => void) {
 
 function App() {
     useEffect(() => {
-
-        fetch('https://raw.githubusercontent.com/Ontros/zkouseni-keys/main/default.txt').then(response => {
-            response.text().then((url: string) => {
-                loadKeys(url, setKey);
+        var url = localStorage.getItem('keyUrl')
+        if (!url) {
+            fetch('https://raw.githubusercontent.com/Ontros/zkouseni-keys/main/default.txt').then(response => {
+                response.text().then((url: string) => {
+                    loadKeys(url, setKey);
+                })
             })
-        })
+        }
+        else {
+            loadKeys(url, setKey)
+        }
     }, [])
 
     const updateKeys = (path: string) => {

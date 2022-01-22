@@ -134,8 +134,8 @@ export default function Selection(props: Props) {
         setAreSettingsOpen(!areSettingsOpen)
     }
 
-    console.log(areSettingsOpen)
     return (
+        //TODO: dej projekty defaultne bliz k sobe ve stredu -> na okrajich vice mista; propy mby primo v parametru funkce -> nemusi byt const destructure ani type
         <div className="App">
             <div className="container">
                 <div className="first-row">

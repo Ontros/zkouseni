@@ -1,16 +1,26 @@
 /*----------------------------------General things----------------------------------*/
+
 :root {
+  color-scheme: dark;
   --dark1: #0d0e0f;
   --dark2: #282c34;
   --dark3: #35373a;
   --dark4: #515358;
   --dark5: #6e7074;
+  --highlight: #ff00ff;
   --popup-bezier: cubic-bezier(.42,.12,.38,1.37);
 }
 
 html {
   overflow: hidden;
   height: 100%;
+}
+
+*:focus {
+  /* outline-color: var(--highlight); */
+  outline: noen !important;
+  border-color: var(--highlight) !important;
+  box-shadow: none;
 }
 
 .App {
@@ -29,9 +39,17 @@ html {
 
 .text-input {
   background-color: var(--dark5);
+  color: var(--dark1);
   border: 0;
   border-radius: .3em;
   font-size: 1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+input {
+  color: var(--dark1);
 }
 
 .button {
@@ -41,6 +59,7 @@ html {
   font-size: 1em;
   padding: .25em;
   user-select: none;
+  color: var(--dark1);
 }
 
 .button:hover{
@@ -59,11 +78,22 @@ html {
 /*----------------------------------Helper classes----------------------------------*/
 
 .space-between {
+  align-items: center;
   justify-content: space-between;
 }
 
 .flex-grow {
   flex-grow: 1;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.space-around {
+  align-items: center;
+  justify-content: space-around;
 }
 
 /*----------------------------------Main page----------------------------------*/
@@ -125,7 +155,7 @@ html {
   display: flex;
   flex-direction: row;
   max-width: initial;
-  width: 50%;
+  width: min(50em, 80%);
 }
 
 .num-selection {
@@ -143,49 +173,78 @@ html {
   text-align: left;
 }
 
-.radioContainer {
-  display: flex;
+.radio-container {
+  display: flex; 
   flex-direction: row;
   align-items: center;
-  justify-content: space-around;
+  justify-content: center;
   width: 50%;
 }
 
-.settings-container-main {
+.radio {
+  margin-right: .5em; 
+}
+
+.settings-container-window {
   position: absolute;
-  left:50vw;
-  top: 50vh;
-  transform: translate(-50%,-50%);
   margin: 0;
+  top: 0;
+  left: 0;
   background-color: var(--dark1);
-  padding: 1.3em;
-  width: 20em;
-  border-radius: .8em;
+  padding: 0em;
+  width: 100%;
+  height: 100%;
   opacity: 0.95;
+  overflow-x: hidden;
+  overflow-y: visible;
 }
 
-/*----------------------------------settins animaiton----------------------------------*/
-.settings-container-main-enter {
-  position: absolute;
-  opacity: 0;
-  top: 100vh;
+.settings-container {
+  margin: 1em;
+  width: 90%;
+  height: 90%;
+  /* padding: 5%; Scrollbar align to window */
+  overflow-y: scroll;
 }
 
-.settings-container-main-enter-active {
-  opacity: 0.95;
-  top:50vh;
-  transition: all 500ms var(--popup-bezier);
-}
+@media only screen and (min-width: 60em) {
+  /* settings becomes a window */
+  .settings-container-window {
+    border-radius: .8em;
+    width: max(50%,20em);
+    height: min-content;
+    max-height: 80%;
+    padding: .5em;
+    left:50vw;
+    top: 50vh;
+    transform: translate(-50%,-50%);
+    overflow: hidden;
+  }
 
-.settings-container-main-exit {
-  position: absolute;
-  top: 50vh;
-}
-
-.settings-container-main-exit-active {
-  opacity: 0;
-  top: 100vh;
-  transition: all 500ms var(--popup-bezier);
+  /*----------------------------------settins animaiton----------------------------------*/
+  
+  .settings-container-window-enter {
+    position: absolute;
+    opacity: 0;
+    top: 100vh;
+  }
+  
+  .settings-container-window-enter-active {
+    opacity: 0.95;
+    top:50vh;
+    transition: all 500ms var(--popup-bezier);
+  }
+  
+  .settings-container-window-exit {
+    position: absolute;
+    top: 50vh;
+  }
+  
+  .settings-container-window-exit-active {
+    opacity: 0;
+    top: 100vh;
+    transition: all 500ms var(--popup-bezier);
+  }
 }
 
 .settings-close-row {
@@ -198,4 +257,25 @@ html {
   display: flex;
   flex-direction: row;
   align-items: center;
+  flex-wrap: wrap;
+  margin: .2em 0;
 }
+
+  .settings-container-window-enter {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .settings-container-window-enter-active {
+    opacity: 0.95;
+    transition: all 500ms var(--popup-bezier);
+  }
+  
+  .settings-container-window-exit {
+    position: absolute;
+  }
+  
+  .settings-container-window-exit-active {
+    opacity: 0;
+    transition: all 500ms var(--popup-bezier);
+  }

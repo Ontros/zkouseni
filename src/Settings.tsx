@@ -17,9 +17,10 @@ type Props = {
 
 export default function Settings(props: Props) {
 
+    //TODO: split CSS into multiple fiels, error handling, chrome blue input outline, settings window scroll, css specificy of text color
     const { from, end, changeFrom, changeEnd, changeAskForSecond, questionaire, areSettingsOpen, setAreSettingsOpen, loadKeys } = props
 
-    const [keyPath, setKeyPath] = useState('')
+    const [keyPath, setKeyPath] = useState(localStorage.getItem('keyUrl') || '')
 
     const inputKeyDown = (e: any) => {
         if (e.key === 'Enter') {
@@ -36,32 +37,36 @@ export default function Settings(props: Props) {
             in={areSettingsOpen}
             unmountOnExit
             timeout={500}
-            classNames="settings-container-main"
+            classNames="settings-container-window"
         >
-            <div className={'settings-container-main'}>
-                <div className={'settings-container'} style={{ display: "inline" }}>
+            <div className={'settings-container-window'}>
+                <div className={'settings-container'} >
                     <div className="settings-close-row">
                         <Close className={"close"} onClick={(event: any) => {
                             setAreSettingsOpen(!areSettingsOpen)
                         }} />
                     </div>
-                    <div className="text-input-title">Url of Key JSON:</div>
+                    <div className="text-input-title">URL to JSON with answer keys:</div>
                     <div className="settings-row space-between">
-                        {/* Key Path Input */}
-                        <input className="text-input flex-grow" type="text" value={keyPath} onKeyDown={inputKeyDown} onChange={changeKeyPath} />
-                        <div className="button" style={{ margin: '.2em 0 .2em 1em', marginRight: 0 }} onClick={() => {
-                            loadKeys(keyPath)
+                        {/* Key Path Input https://blog.logrocket.com/using-localstorage-react-hooks/*/}
+                        <textarea className="text-input flex-grow" style={{ marginRight: '1em' }} value={keyPath} onKeyDown={inputKeyDown} onChange={changeKeyPath} />
+                        <div className="button" style={{ margin: '.2em 0 .2em 0em' }} onClick={() => {
+                            loadKeys(keyPath.trim())
                         }}>Confirm</div>
                     </div>
-                    <div className="settings-row space-between">
-                        <div className="from-to">
-                            <input type="number" className="num-selection" value={from} onChange={changeFrom} />
-                            <input type="number" className="num-selection" value={end} onChange={changeEnd} />
-                        </div>
-                        <div onChange={changeAskForSecond} className="radioContainer">
+                    <div className="text-input-title">Select questions from to:</div>
+                    <div className="settings-row flex-center">
+                        <input type="number" className="num-selection" value={from} onChange={changeFrom} />
+                        <input type="number" className="num-selection" value={end} onChange={changeEnd} />
+                    </div>
+                    <div className="text-input-title">lkafsdjlfkj</div>
+                    <div className="settings-row space-around">
+                        <label className="radio-container">
                             <input type="radio" value="1" name="quest" className="radio" /> {questionaire.key1}
+                        </label>
+                        <label className="radio-container">
                             <input type="radio" value="2" name="quest" className="radio" /> {questionaire.key2}
-                        </div>
+                        </label>
                     </div>
                 </div >
             </div>
