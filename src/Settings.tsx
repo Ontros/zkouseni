@@ -59,7 +59,7 @@ export default function Settings(props: Props) {
                         <input type="number" className="num-selection" value={from} onChange={changeFrom} />
                         <input type="number" className="num-selection" value={end} onChange={changeEnd} />
                     </div>
-                    <div className="text-input-title">lkafsdjlfkj</div>
+                    <div className="text-input-title">{"Question -> Answer"}</div>
                     <div className="settings-row space-around">
                         <label className="radio-container">
                             <input type="radio" value="1" name="quest" className="radio" /> {questionaire.key1}

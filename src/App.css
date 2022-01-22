@@ -7,7 +7,7 @@
   --dark3: #35373a;
   --dark4: #515358;
   --dark5: #6e7074;
-  --highlight: #ff00ff;
+  /* --highlight: #ff00ff; */
   --popup-bezier: cubic-bezier(.42,.12,.38,1.37);
 }
 
@@ -16,12 +16,11 @@ html {
   height: 100%;
 }
 
-*:focus {
-  /* outline-color: var(--highlight); */
+/* *:focus {
   outline: noen !important;
   border-color: var(--highlight) !important;
   box-shadow: none;
-}
+} */
 
 .App {
   text-align: center;
@@ -200,11 +199,10 @@ input {
 }
 
 .settings-container {
+  display: block;
   margin: 1em;
-  width: 90%;
-  height: 90%;
-  /* padding: 5%; Scrollbar align to window */
-  overflow-y: scroll;
+  width: calc(100%-1em);
+  height: calc(100%-1em);
 }
 
 @media only screen and (min-width: 60em) {
@@ -217,8 +215,7 @@ input {
     padding: .5em;
     left:50vw;
     top: 50vh;
-    transform: translate(-50%,-50%);
-    overflow: hidden;
+    transform: translate(calc(-50% + .4px),calc(-50% + .4px)); /*Chrome is weird*/
   }
 
   /*----------------------------------settins animaiton----------------------------------*/
