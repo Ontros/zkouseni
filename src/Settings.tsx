@@ -17,7 +17,8 @@ type Props = {
 
 export default function Settings(props: Props) {
 
-    //TODO: split CSS into multiple fiels, error handling, chrome blue input outline, settings window scroll, css specificy of text color
+    //
+    //TODO: chrome blue input outline, error handling, Language, new URL => stats dont reset, default select radio
     const { from, end, changeFrom, changeEnd, changeAskForSecond, questionaire, areSettingsOpen, setAreSettingsOpen, loadKeys } = props
 
     const [keyPath, setKeyPath] = useState(localStorage.getItem('keyUrl') || '')
@@ -62,10 +63,10 @@ export default function Settings(props: Props) {
                     <div className="text-input-title">{"Question -> Answer"}</div>
                     <div className="settings-row space-around">
                         <label className="radio-container">
-                            <input type="radio" value="1" name="quest" className="radio" /> {questionaire.key1}
+                            <input type="radio" value="1" name="quest" className="radio" onChange={changeAskForSecond} /> {questionaire.key1}
                         </label>
                         <label className="radio-container">
-                            <input type="radio" value="2" name="quest" className="radio" /> {questionaire.key2}
+                            <input type="radio" value="2" name="quest" className="radio" onChange={changeAskForSecond} /> {questionaire.key2}
                         </label>
                     </div>
                 </div >

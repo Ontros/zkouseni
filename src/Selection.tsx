@@ -138,16 +138,19 @@ export default function Selection(props: Props) {
         //TODO: dej projekty defaultne bliz k sobe ve stredu -> na okrajich vice mista; propy mby primo v parametru funkce -> nemusi byt const destructure ani type
         <div className="App">
             <div className="container">
-                <div className="first-row">
+                <div className="selection-row first-selection-row">
                     <div className="zadani">{`${capitalizeFirst(question)} ${questionCorrectnessArray[questionIndex]}`}</div>
                     <button className={`button button-clear`} onClick={onOpenerClick}>{`⚙️`}</button>
                 </div>
                 <input className="text-input" type="text" value={answerInputString} onKeyDown={inputKeyDown} onChange={changeAnswerInput} />
-                <div className="bottom-container">
+                <div className="selection-row last-selection-row">
                     <button className="button" onClick={moveToNextQuestion} >Potvrdit</button>
                     <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
-                <Settings from={from} areSettingsOpen={areSettingsOpen} setAreSettingsOpen={setAreSettingsOpen}
+                <Settings
+                    from={from}
+                    areSettingsOpen={areSettingsOpen}
+                    setAreSettingsOpen={setAreSettingsOpen}
                     end={end}
                     changeFrom={changeFrom}
                     changeEnd={changeEnd}
