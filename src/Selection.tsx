@@ -3,6 +3,7 @@ import React, { useState } from 'react'
 import { Questionaire, Key } from './App'
 import Settings from './Settings'
 import weightedAverage from './weightedAverage'
+import { chyba } from './Utils'
 
 type Props = {
     questionaire: Questionaire;
@@ -43,10 +44,12 @@ export default function Selection(props: Props) {
     const [end, setEnd] = useState(questionaire.keys.length)
     //Bool zda se pta na 2. item v otazce
     const [askForSecond, setAskForSecond] = useState(true)
-    //Dotaznik
+    //Tracks performance
     const [questionCorrectnessArray, setQuestionCorrectnessArray] = useState<number[]>(getBaseResults(questionaire.keys.length))
     //Are settings open?
     const [areSettingsOpen, setAreSettingsOpen] = useState(false)
+    //Array of keys that move to next question
+    const [nextKeys, setNextKeys] = useState(['Enter']);
 
     //Write event in Answer input
     const changeAnswerInput = (event: any) => {
@@ -71,7 +74,6 @@ export default function Selection(props: Props) {
             setAskForSecond(false)
     }
 
-    //TODO: maybe move to seperate function
     //Get quesion and answer
     var question = 'err'
     var answer = 'err'
@@ -87,8 +89,8 @@ export default function Selection(props: Props) {
 
     //Keyboard skipping
     const inputKeyDown = (e: any) => {
-        //TODO: choices (space to skip, space+shift to skip)
-        if (e.key === 'Enter') {
+        console.log("ekey", e.key)
+        if (nextKeys.indexOf(e.key) !== -1) {
             moveToNextQuestion()
         }
     }
@@ -135,7 +137,6 @@ export default function Selection(props: Props) {
     }
 
     return (
-        //TODO: dej projekty defaultne bliz k sobe ve stredu -> na okrajich vice mista; propy mby primo v parametru funkce -> nemusi byt const destructure ani type
         <div className="App">
             <div className="container">
                 <div className="selection-row first-selection-row">
@@ -148,6 +149,7 @@ export default function Selection(props: Props) {
                     <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
                 <Settings
+                    //TODO: useContext instead of this mess
                     from={from}
                     areSettingsOpen={areSettingsOpen}
                     setAreSettingsOpen={setAreSettingsOpen}
@@ -156,7 +158,9 @@ export default function Selection(props: Props) {
                     changeEnd={changeEnd}
                     changeAskForSecond={changeAskForSecond}
                     questionaire={questionaire}
-                    loadKeys={loadKeys} />
+                    loadKeys={loadKeys}
+                    nextKeys={nextKeys}
+                    setNextKeys={setNextKeys} />
             </div>
         </div>
     );
@@ -305,9 +309,4 @@ function removeDiacritics(str: string) {
         //@ts-expect-error
         return diacriticsMap[a] || a;
     });
-}
-
-//Alert api (extremly complex ;)
-var chyba = (code: string) => {
-    alert(`Ondřej to zase posral, tohle by mu snad mělo pomoct opravit tento problém: ${code}`)
 }

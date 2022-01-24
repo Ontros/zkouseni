@@ -44,4 +44,9 @@ function LanguageSelect(props: LangProps) {
     )
 }
 
-export { Lang, LanguageSelect }
+//Alert api (extremly complex ;)
+var chyba = (code: string) => {
+    alert(`Ondřej to zase posral, tohle by mu snad mělo pomoct opravit tento problém: ${code}`)
+}
+
+export { Lang, LanguageSelect, chyba }
