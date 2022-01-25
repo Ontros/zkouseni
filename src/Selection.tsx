@@ -89,7 +89,6 @@ export default function Selection(props: Props) {
 
     //Keyboard skipping
     const inputKeyDown = (e: any) => {
-        console.log("ekey", e.key)
         if (nextKeys.indexOf(e.key) !== -1) {
             moveToNextQuestion()
         }
@@ -171,7 +170,7 @@ function randomItemOfArray(array: any[]) {
     return array[Math.floor(Math.random() * array.length)]
 }
 
-function createWeights(min: number, max: number, result: number[], key: Key) {
+function createWeights(min: number, max: number, result: number[]) {
     //NOTE: udelat
     var weights = []
     for (var i = min; i <= max; i++) {
@@ -181,22 +180,20 @@ function createWeights(min: number, max: number, result: number[], key: Key) {
         }
         weights.push({ weight, index: i })
     }
-    console.log(weights)
     return weights
 }
 
-function randomIndexOfArray(minS: string, maxS: string, result: number[], key: Key) {
+function randomIndexOfArray(minS: string, maxS: string, result: number[], key: Key[]) {
     //filter inputs
     var min = parseInt(minS) - 1
     var max = parseInt(maxS) - 1
-    if (min < 0 || max > 117 || min >= max) {
-        alert("Chyba výběru")
+    if (min < 0 || max > key.keys.length || min >= max) {
+        alert(`Invalid values in "Select questions from to"`)
         return 0
     }
 
-    //var number = Math.floor(Math.random() * (max - min)) + min
     //proces inputs
-    var number = weightedAverage(createWeights(min, max, result, key))
+    var number = weightedAverage(createWeights(min, max, result))
     return number
 }
 

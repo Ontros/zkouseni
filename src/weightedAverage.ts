@@ -56,6 +56,5 @@ var test = () => {
             dva++
         }
     }
-    console.log(nula, jedna, dva)
 }
 export { test }

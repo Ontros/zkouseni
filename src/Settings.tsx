@@ -21,7 +21,7 @@ type Props = {
 export default function Settings(props: Props) {
 
     //
-    //TODO: new URL => stats dont reset,Load JSON Key by default, error handling, Language, 
+    //TODO: new URL => stats dont reset, error handling, Language, PUBLISH
     //chrome blue input outline
     const { from, end, changeFrom, changeEnd, changeAskForSecond, questionaire, areSettingsOpen, setAreSettingsOpen, loadKeys, nextKeys, setNextKeys } = props
 
