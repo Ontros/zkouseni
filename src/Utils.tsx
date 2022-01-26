@@ -19,6 +19,7 @@ interface LangProps {
     lang: number;
     setLang: (arg0: number) => void;
 }
+//   const [lang, setLang] = useState(detectBrowserLanguage().substring(0, 2).toLowerCase() === 'cs' ? 1 : 0) //1 = czech; 0 = english
 
 function LanguageSelect(props: LangProps) {
     const { lang, setLang } = props

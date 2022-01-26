@@ -4,6 +4,9 @@ import React, { useEffect, useState } from 'react';
 import './App.css';
 import Loading from './Loading';
 import Selection from './Selection';
+//@ts-expect-error
+import detectBrowserLanguage from 'detect-browser-language'
+import { Lang } from './Utils'
 
 export type Questionaire = {
     key1: string,
@@ -11,16 +14,16 @@ export type Questionaire = {
     keys: Key
 }
 
-const wrongURL = () => {
-    alert("Something is wrong with the URL you entered (or you might be offline)")
+const wrongURL = (lang: number) => {
+    alert(Lang(lang, ["Something is wrong with the URL you entered (or you might be offline)", "Něco je špatně se zadanou URL (nebo mohl spadnout internet)"]))
     // window.location.reload()
 }
 
-function loadKeys(path: string, setKey: (arg0: Questionaire) => void, setIsLoading: (arg0: boolean) => void) {
+function loadKeys(lang: number, path: string, setKey: (arg0: Questionaire) => void, setIsLoading: (arg0: boolean) => void) {
     fetch(path).then((data) => {
         data.json().then((json) => {
             if (!json.key1 || !json.key2 || !json.keys) {
-                wrongURL()
+                wrongURL(lang)
                 return
             }
             setIsLoading(true)
@@ -38,24 +41,26 @@ function App() {
         if (!url) {
             fetch('https://raw.githubusercontent.com/Ontros/zkouseni-keys/main/default.txt').then(response => {
                 response.text().then((url: string) => {
-                    loadKeys(url, setKey, setIsLoading);
+                    loadKeys(lang, url, setKey, setIsLoading);
                 })
             })
         }
         else {
-            loadKeys(url, setKey, setIsLoading)
+            loadKeys(lang, url, setKey, setIsLoading)
         }
     }, [])
 
     const updateKeys = (path: string) => {
-        loadKeys(path, setKey, setIsLoading)
+        loadKeys(lang, path, setKey, setIsLoading)
     }
 
     //Answer keys
     const [key, setKey] = useState<Questionaire>({ key1: "error", key2: "error", keys: [] })
     const [isLoading, setIsLoading] = useState<boolean>(true)
+    //Language ID
+    const [lang, setLang] = useState(detectBrowserLanguage().substring(0, 2).toLowerCase() === 'cs' ? 1 : 0) //1 = czech; 0 = english
 
-    return isLoading ? <Loading /> : <Selection questionaire={key} loadKeys={updateKeys} />
+    return isLoading ? <Loading /> : <Selection questionaire={key} loadKeys={updateKeys} lang={lang} setLang={setLang} />
     // return key.key1 !== "error" ? <Selection questionaire={key} loadKeys={updateKeys} /> : <Loading />
 }
 export type Key = { a: string, b: string }[]

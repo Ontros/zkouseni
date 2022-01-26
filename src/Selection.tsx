@@ -3,11 +3,13 @@ import React, { useState } from 'react'
 import { Questionaire, Key } from './App'
 import Settings from './Settings'
 import weightedAverage from './weightedAverage'
-import { chyba } from './Utils'
+import { chyba, Lang } from './Utils'
 
 type Props = {
     questionaire: Questionaire;
     loadKeys: (arg0: string) => void;
+    lang: number;
+    setLang: (arg0: number) => void
 }
 
 //Otazky a dotazniky
@@ -15,7 +17,7 @@ type Props = {
 export default function Selection(props: Props) {
     //TODO: multiple words (array)
     //Get vars from props
-    const { questionaire, loadKeys } = props
+    const { questionaire, loadKeys, lang, setLang } = props
 
     //Defaultni data pro state
     var getBaseResults = (number: number) => {
@@ -80,7 +82,6 @@ export default function Selection(props: Props) {
     if (askForSecond) {
         question = questionaire.keys[questionIndex].a
         answer = questionaire.keys[questionIndex].b
-
     }
     else {
         question = questionaire.keys[questionIndex].b
@@ -99,7 +100,7 @@ export default function Selection(props: Props) {
         //correct
         if (removeDiacritics(answerInputString.toLocaleLowerCase()).trim() === removeDiacritics(answer.toLocaleLowerCase()).trim()) {
             setIsCorrect(true)
-            setFeedbackString(`Dobře ${question} (${questionIndex + 1}) ${answer}`)
+            setFeedbackString(`${Lang(lang, ["Correct", "Dobře"])} ${question} (${questionIndex + 1}) = ${answer}`)
             var newResult = questionCorrectnessArray
             newResult[questionIndex] += 1
             setQuestionCorrectnessArray(newResult)
@@ -109,7 +110,7 @@ export default function Selection(props: Props) {
         //wrong
         else {
             setIsCorrect(false)
-            setFeedbackString(`Špatně ${question} (${questionIndex + 1}) ${answer}`)
+            setFeedbackString(`${Lang(lang, ["Wrong", "Špatně"])} ${question} (${questionIndex + 1}) = ${answer}`)
             // eslint-disable-next-line @typescript-eslint/no-redeclare
             var newResult = questionCorrectnessArray
             newResult[questionIndex] -= 1
@@ -144,7 +145,7 @@ export default function Selection(props: Props) {
                 </div>
                 <input className="text-input" type="text" value={answerInputString} onKeyDown={inputKeyDown} onChange={changeAnswerInput} />
                 <div className="selection-row last-selection-row">
-                    <button className="button" onClick={moveToNextQuestion} >Potvrdit</button>
+                    <button className="button" onClick={moveToNextQuestion}>{Lang(lang, ["Confirm", "Potvrdit"])}</button>
                     <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
                 <Settings
@@ -159,7 +160,10 @@ export default function Selection(props: Props) {
                     questionaire={questionaire}
                     loadKeys={loadKeys}
                     nextKeys={nextKeys}
-                    setNextKeys={setNextKeys} />
+                    setNextKeys={setNextKeys}
+                    lang={lang}
+                    setLang={setLang}
+                />
             </div>
         </div>
     );

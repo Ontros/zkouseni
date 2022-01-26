@@ -110,7 +110,7 @@
 .settings-close-row {
   display: flex;
   align-items: center;
-  justify-content: flex-end;
+  justify-content: space-between;
 }
 
 .settings-row {
@@ -139,3 +139,15 @@
     opacity: 0;
     transition: all 500ms var(--popup-bezier);
   }
+
+.language-selection {
+  color: var(--primary);
+  font-size: .9em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.flag {
+  height: .8em;
+  margin-right: .25em;
+}
