@@ -1,0 +1,113 @@
+алхимик;alchymista
+ансамбль;celek
+аеропорт;letiště
+башня;věž
+бывший;bývalý
+[виден,видна,видно,видны];vidět
+высокий;vysoký
+[оброзная башня,вышка];rozhledna
+глубокий;hluboký
+гора;hora
+государственный строй;státní zřízení
+гражданин;občan
+дворец;palác
+длинный;dlouhý
+достижение;úspěch
+достопримечателность;památka
+еврейский;židovský
+Елисейские поля;Champs Elysees
+железная дорога;železnice
+жемчужина;perkla
+житель;obyvatel
+замечательный;skvělý
+замок;[zámek,hrad]
+зашчишчать;chránit
+землячество;krajanský spolek
+знаменитый;slavný
+зоопарк;zoo
+извесный;známý
+изобретение;vynález
+источник;pramen
+кладбишче;hřbitov
+короткий;krátký
+костехранилишче;kostnice
+красивый;krásný
+крепостная стена;zeď
+крестьянин;rolník
+крыша;střecha
+курорт;lázně
+лавочка;obchůdek
+льгота;úleva
+мастерская;dílna
+место;místo
+обшчина;občina
+обязательно;určitě
+озеро;jezero
+основан;založen
+открытие;objev
+памятник;pomník
+парить;vznášet se
+пешеход;chodec
+побывать;pobýt
+поездка;zájezd
+покровитель;ochránce
+популярный;populární
+посёлок;obec
+построен;postaven
+пошутить;zažertovat
+президент;prezident
+рано;časně
+ратуша;radnice
+рейс;let
+река;řeka
+ремецленник;řemeslník
+романтичный;romantický
+сад;zahrada
+свидание;rande
+свинец;olovo
+святой;svatý
+синагога;synagoga
+слига;sluha
+собор;chrám
+событие;událost
+соотечественник;krajan
+страна;dávné časy
+старый;starý
+столица;hlavní město
+стражник;strážný
+торговрц;obchodník
+турист;turista
+уголок;koutek
+узкий;úzký
+узнать;zjistit
+урожай;úroda
+хороший;dobrý
+художник;umělec
+цемесская бухта;cemesský záliv
+чудесный;kouzelný
+чудо;zázrak
+шпиль;špička
+ейфелева башня;eiffelova věž
+вацлавская пошчадь;václavské náměstí
+вышеград;vyšehrad
+градчанская плошчадь;hradčanské náměstí
+далиборова башня;daliborova věž
+жижковская телебашня;žižkovská televizní věž
+золотая улочка;zlatá ulička
+карлов мост;karlův most
+карлов университет;karlova univerzita
+национальнй музей;národní muzeum
+петршин;petřín
+[петршинская обзорная башня, петршинская обзорная вышка];petřínská rozhledna
+пражский град;pražský hrad
+собор святово вита;chrám svatého víta
+староместская плошчадь;staroměstské náměstí
+старибивая синагога;staronová synagoga
+штефаникова обсерваротия;štefánikova hvězdárna
+какой красивый;to je ale krásný
+всё чудесно;všechno je kouzelné
+когда будешь в чехии;až budeš v česku
+обязательно посети;určitě navštiv
+если будет возможность;jestli budeš mít možnost
+чехи гордятся;česi jsou hrdi
+ето памятник;to je pomník

@@ -40,22 +40,21 @@ var autoIndexer = (array: WeightArray) => {
 }
 
 //test
-var test = () => {
-    var nula = 0
-    var jedna = 0
-    var dva = 0
-    for (var i = 0; i < 10001; i++) {
-        var ans = wA(autoIndexer([1, 1]))
-        if (ans === 0) {
-            nula++
-        }
-        else if (ans === 1) {
-            jedna++
-        }
-        else {
-            dva++
-        }
-    }
-    console.log(nula, jedna, dva)
-}
-export { test }
+// var test = () => {
+//     var nula = 0
+//     var jedna = 0
+//     var dva = 0
+//     for (var i = 0; i < 10001; i++) {
+//         var ans = wA(autoIndexer([1, 1]))
+//         if (ans === 0) {
+//             nula++
+//         }
+//         else if (ans === 1) {
+//             jedna++
+//         }
+//         else {
+//             dva++
+//         }
+//     }
+// }
+// export { test }

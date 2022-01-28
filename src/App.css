@@ -1,24 +1,101 @@
-.App {
-  text-align: center;
+@import "Settings.css";
+/*----------------------------------General things----------------------------------*/
+
+:root {
+  color-scheme: dark;
+  --dark1: #0d0e0f;
+  --dark2: #282c34;
+  --dark3: #35373a;
+  --dark4: #515358;
+  --dark5: #6e7074;
+  --popup-bezier: cubic-bezier(.42,.12,.38,1.37);
 }
 
+html {
+  overflow: hidden;
+  height: 100%;
+}
 
-.App-header {
-  background-color: #282c34;
+.App {
+  text-align: center;
+  background-color: var(--dark2);
   min-height: 100vh;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: calc(20px + 2vmin);
+  font-size: 35px;
   color: white;
 }
+
+/*----------------------------------General classes----------------------------------*/
+
+.text-input {
+  background-color: var(--dark5);
+  color: var(--dark1);
+  border: 0;
+  border-radius: .3em;
+  font-size: 1em;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+    sans-serif;
+}
+
+input {
+  color: var(--dark1);
+}
+
+.button {
+  border: 0;
+  border-radius: .35em;
+  background-color: var(--dark5);
+  font-size: 1em;
+  padding: .25em;
+  user-select: none;
+  color: var(--dark1);
+}
+
+.button:hover{
+  cursor: pointer;
+  background-color: var(--dark4);
+}
+
+.button:active {
+  background-color: var(--dark3);
+}
+
+.button-clear {
+  background-color: var(--dark2);
+}
+
+/*----------------------------------Helper classes----------------------------------*/
+
+.space-between {
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-grow {
+  flex-grow: 1;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+.space-around {
+  align-items: center;
+  justify-content: space-around;
+}
+
+/*----------------------------------Main page----------------------------------*/
 
 .container {
   display: flex;
   flex-direction: column;
-  margin-left: 100px;
-  margin-right: 100px;
+  margin-left: 3em;
+  margin-right: 3em;
   max-width: 80%;
 }
 
@@ -26,38 +103,23 @@
   text-align: left;
 }
 
-.text-input {
-  background-color: #6e7074;
-  border: 0;
-  border-radius: 10px;
-  font-size: calc(20px + 2vmin);
-}
-
-.confirm {
-  border: 0;
-  border-radius: 10px;
-  background-color: #6e7074;
-  font-size: calc(20px + 2vmin);
-  padding: calc(1px + 1vmin);
-}
-.confirm:hover{
-  cursor: pointer;
-  background-color: #515358;
-}
-.confirm:active {
-  background-color: #35373a;
-}
-
-.bottom-container {
-  margin-top: calc(5px + 1.5vmin);
-  display: flex;
-  flex-direction: row;
+.selection-row {
+  display:flex;
   align-items: center;
+  flex-direction: row;
+}
+
+.first-selection-row {
+  justify-content: space-between;
+}
+
+.last-selection-row {
+  margin-top: .4em;
   justify-content: flex-start;
 }
 
 .result-text {
-  margin-left: calc(5px + 1.5vmin);
+  margin-left: .4em;
   white-space: initial;
 }
 
@@ -67,25 +129,4 @@
 
 .correctness-false {
   color: red;
-}
-
-.from-to {
-  display: flex;
-  flex-direction: row;
-}
-
-.num-selection {
-  background-color: #6e7074;
-  border: none;
-  margin: calc(5px + 1.5vmin);
-  max-width: 40%;
-  font-size: calc(20px + 2vmin);
-  border-radius: 10px;
-}
-
-.radioContainer {
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-around;
 }

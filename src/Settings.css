@@ -1,0 +1,153 @@
+/*----------------------------------Settings page----------------------------------*/
+
+.close {
+  width: 1.5em;
+  height: 1.5em;
+  cursor: pointer;
+  fill:white;
+  opacity: 0.85;
+}
+
+.close:hover {
+  opacity: 0.6;
+}
+
+.from-to {
+  display: flex;
+  flex-direction: row;
+  max-width: initial;
+  width: min(50em, 80%);
+}
+
+.num-selection {
+  background-color: var(--dark5);
+  border: none;
+  margin: .4em;
+  width: 4em;
+  flex-grow: 1;
+  font-size: 1em;
+  border-radius: 10px;
+}
+
+.text-input-title {
+  font-size: 1.1em;
+  text-align: left;
+}
+
+.radio-container {
+  display: flex; 
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: 50%;
+  user-select: none;
+}
+
+.radio {
+  margin-right: .5em; 
+}
+
+.settings-container-window {
+  position: absolute;
+  margin: 0;
+  top: 0;
+  left: 0;
+  background-color: var(--dark1);
+  padding: 0em;
+  width: 100%;
+  height: 100%;
+  opacity: 0.95;
+  overflow-x: hidden;
+  overflow-y: visible;
+}
+
+.settings-container {
+  display: block;
+  margin: 1em;
+  width: calc(100%-1em);
+  height: calc(100%-1em);
+}
+
+@media only screen and (min-width: 60em) {
+  /* settings becomes a window */
+  .settings-container-window {
+    border-radius: .8em;
+    width: max(50%,20em);
+    height: min-content;
+    max-height: 80%;
+    padding: .5em;
+    left:50vw;
+    top: 50vh;
+    transform: translate(calc(-50% + .4px),calc(-50% + .4px)); /*Chrome is weird*/
+  }
+
+  /*----------------------------------settins animaiton----------------------------------*/
+  
+  .settings-container-window-enter {
+    position: absolute;
+    opacity: 0;
+    top: 100vh;
+  }
+  
+  .settings-container-window-enter-active {
+    opacity: 0.95;
+    top:50vh;
+    transition: all 500ms var(--popup-bezier);
+  }
+  
+  .settings-container-window-exit {
+    position: absolute;
+    top: 50vh;
+  }
+  
+  .settings-container-window-exit-active {
+    opacity: 0;
+    top: 100vh;
+    transition: all 500ms var(--popup-bezier);
+  }
+}
+
+.settings-close-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.settings-row {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  margin: .2em 0;
+}
+
+  .settings-container-window-enter {
+    position: absolute;
+    opacity: 0;
+  }
+  
+  .settings-container-window-enter-active {
+    opacity: 0.95;
+    transition: all 500ms var(--popup-bezier);
+  }
+  
+  .settings-container-window-exit {
+    position: absolute;
+  }
+  
+  .settings-container-window-exit-active {
+    opacity: 0;
+    transition: all 500ms var(--popup-bezier);
+  }
+
+.language-selection {
+  color: var(--primary);
+  font-size: .9em;
+  cursor: pointer;
+  user-select: none;
+}
+
+.flag {
+  height: .8em;
+  margin-right: .25em;
+}

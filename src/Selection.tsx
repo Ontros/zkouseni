@@ -1,13 +1,25 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import React, { useState } from 'react'
-import { Preset, Key } from './App'
+import { Questionaire, Key } from './App'
+import Settings from './Settings'
 import weightedAverage from './weightedAverage'
+import { chyba, Lang } from './Utils'
 
 type Props = {
-    preset: Preset
+    questionaire: Questionaire;
+    loadKeys: (arg0: string) => void;
+    lang: number;
+    setLang: (arg0: number) => void
 }
+
+//Otazky a dotazniky
+
 export default function Selection(props: Props) {
     //TODO: multiple words (array)
-    const { preset } = props
+    //Get vars from props
+    const { questionaire, loadKeys, lang, setLang } = props
+
+    //Defaultni data pro state
     var getBaseResults = (number: number) => {
         var resultes = []
         for (var i = 0; i < number; i++) {
@@ -15,128 +27,154 @@ export default function Selection(props: Props) {
         }
         return resultes
     }
-    const [resultText, setResultText] = useState("")
-    const [dobre, setDobre] = useState(0)
-    const [spatne, setSpatne] = useState(0)
-    const [odpoved, setOdpoved] = useState("")
-    const [currentKey, setCurrentKey] = useState(0)
-    const [correct, setCorrect] = useState(true)
+
+    //Feedback spravnosti predchozi odpovedi
+    const [feedbackString, setFeedbackString] = useState("")
+    //Pocet spravnych odpovedi
+    const [correctAmount, setCorrectAmount] = useState(0)
+    //Pocet spatnych odpovedi
+    const [wrongAmount, setWrongAmount] = useState(0)
+    //Bool zda byla posledni odpoved dobre
+    const [isCorrect, setIsCorrect] = useState(true)
+    //State pro ukladani textu v odpoved inputu
+    const [answerInputString, setAnswerInputString] = useState("")
+    //Current questionIndex
+    const [questionIndex, setQuestionIndex] = useState(0)
+    //Minimalni mozna otazka
     const [from, setFrom] = useState(1)
-    const [end, setEnd] = useState(preset.keys.length)
-    const [askForNazev, setAskForNazev] = useState(true)
-    const [result, setResult] = useState<number[]>(getBaseResults(preset.keys.length))
-    console.log(preset)
+    //Maximalni mozna otazka
+    const [end, setEnd] = useState(questionaire.keys.length)
+    //Bool zda se pta na 2. item v otazce
+    const [askForSecond, setAskForSecond] = useState(true)
+    //Tracks performance
+    const [questionCorrectnessArray, setQuestionCorrectnessArray] = useState<number[]>(getBaseResults(questionaire.keys.length))
+    //Are settings open?
+    const [areSettingsOpen, setAreSettingsOpen] = useState(false)
+    //Array of keys that move to next question
+    const [nextKeys, setNextKeys] = useState(['Enter']);
 
-
-    const handleChange = (event: any) => {
-        setOdpoved(event.target.value)
+    //Write event in Answer input
+    const changeAnswerInput = (event: any) => {
+        setAnswerInputString(event.target.value)
     }
+
+    //Write event in from input
     const changeFrom = (event: any) => {
         setFrom(event.target.value)
-        // if (event.target.value === '') {
-        //     setFrom(event.target.value)
-        // }
-        // else if (event.target.value <= 0) {
-        //     setFrom(1)
-        // }
-        // else if (event.target.value >= end) {
-        //     setFrom(end - 1)
-        // }
-        // else {
-        // }
     }
+
+    //Write event in end input
     const changeEnd = (event: any) => {
         setEnd(event.target.value)
-        // if (event.target.value > 118) {
-        //     setEnd(118)
-        // }
-        // else if (event.target.value <= from) {
-        //     setEnd(from + 1)
-        // }
-        // else {
-        // }
     }
-    const changeRadio = (event: any) => {
+
+    //Change in ask for second
+    const changeAskForSecond = (event: any) => {
         if (event.target.value === "1")
-            setAskForNazev(true)
+            setAskForSecond(true)
         else
-            setAskForNazev(false)
+            setAskForSecond(false)
     }
+
+    //Get quesion and answer
     var question = 'err'
     var answer = 'err'
-    if (askForNazev) {
-        question = preset.keys[currentKey].a
-        answer = preset.keys[currentKey].b
-
+    if (askForSecond) {
+        question = questionaire.keys[questionIndex].a
+        answer = questionaire.keys[questionIndex].b
     }
     else {
-        question = preset.keys[currentKey].b
-        answer = preset.keys[currentKey].a
+        question = questionaire.keys[questionIndex].b
+        answer = questionaire.keys[questionIndex].a
     }
 
+    //Keyboard skipping
     const inputKeyDown = (e: any) => {
-        if (e.key === 'Enter') {
-            onClick()
+        if (nextKeys.indexOf(e.key) !== -1) {
+            moveToNextQuestion()
         }
     }
 
-    const onClick = () => {
-        if (removeDiacritics(odpoved.toLocaleLowerCase()).trim() === removeDiacritics(answer.toLocaleLowerCase()).trim()) {
-            //dobre
-            setCorrect(true)
-            setResultText(`Dobře ${question} (${currentKey + 1}) ${answer}`)
-            var newResult = result
-            newResult[currentKey] += 1
-            setResult(newResult)
-            setDobre(dobre + 1)
+    const moveToNextQuestion = () => {
+
+        //correct
+        if (removeDiacritics(answerInputString.toLocaleLowerCase()).trim() === removeDiacritics(answer.toLocaleLowerCase()).trim()) {
+            setIsCorrect(true)
+            setFeedbackString(`${Lang(lang, ["Correct", "Dobře"])} ${question} (${questionIndex + 1}) = ${answer}`)
+            var newResult = questionCorrectnessArray
+            newResult[questionIndex] += 1
+            setQuestionCorrectnessArray(newResult)
+            setCorrectAmount(correctAmount + 1)
         }
+
+        //wrong
         else {
-            //spatne
-            setCorrect(false)
-            setResultText(`Špatně ${question} (${currentKey + 1}) ${answer}`)
-            var newResult = result
-            newResult[currentKey] -= 1
-            setResult(newResult)
-            setSpatne(spatne + 1)
+            setIsCorrect(false)
+            setFeedbackString(`${Lang(lang, ["Wrong", "Špatně"])} ${question} (${questionIndex + 1}) = ${answer}`)
+            // eslint-disable-next-line @typescript-eslint/no-redeclare
+            var newResult = questionCorrectnessArray
+            newResult[questionIndex] -= 1
+            setQuestionCorrectnessArray(newResult)
+            setWrongAmount(wrongAmount + 1)
         }
-        setOdpoved("")
+
+        //Reset answerInputString
+        setAnswerInputString("")
+
+        //Get new question
         //@ts-expect-error
-        var index = randomIndexOfArray(from, end, result, preset)
+        var index = randomIndexOfArray(from, end, questionCorrectnessArray, questionaire)
         if (index === null) {
             console.log('no index')
             chyba('58')
             return
         }
-        setCurrentKey(index)
+        setQuestionIndex(index)
     }
-    //(${currentKey + 1}) 
+
+    var onOpenerClick = (event: any) => {
+        setAreSettingsOpen(!areSettingsOpen)
+    }
+
     return (
-        <div className="App App-header">
+        <div className="App">
             <div className="container">
-                <div className="zadani">{`${capitalizeFirst(question)} ${result[currentKey]}`}</div>
-                <input className="text-input" type="text" value={odpoved} onKeyDown={inputKeyDown} onChange={handleChange} />
-                <div className="bottom-container">
-                    <button className="confirm" onClick={onClick}>Potvrdit</button>
-                    <div className={`result-text correctness-${correct}`} >{resultText}</div>
+                <div className="selection-row first-selection-row">
+                    <div className="zadani">{`${capitalizeFirst(question)} ${questionCorrectnessArray[questionIndex]}`}</div>
+                    <button className={`button button-clear`} onClick={onOpenerClick}>{`⚙️`}</button>
                 </div>
-                <div className="from-to">
-                    <input type="number" className="num-selection" value={from} onChange={changeFrom} />
-                    <input type="number" className="num-selection" value={end} onChange={changeEnd} />
+                <input className="text-input" type="text" value={answerInputString} onKeyDown={inputKeyDown} onChange={changeAnswerInput} />
+                <div className="selection-row last-selection-row">
+                    <button className="button" onClick={moveToNextQuestion}>{Lang(lang, ["Confirm", "Potvrdit"])}</button>
+                    <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
-                <div onChange={changeRadio} className="radioContainer">
-                    <input type="radio" value="1" name="quest" className="radio" /> {preset.key1}
-                    <input type="radio" value="2" name="quest" className="radio" /> {preset.key2}
-                </div>
+                <Settings
+                    //TODO: useContext instead of this mess
+                    from={from}
+                    areSettingsOpen={areSettingsOpen}
+                    setAreSettingsOpen={setAreSettingsOpen}
+                    end={end}
+                    changeFrom={changeFrom}
+                    changeEnd={changeEnd}
+                    changeAskForSecond={changeAskForSecond}
+                    questionaire={questionaire}
+                    loadKeys={loadKeys}
+                    nextKeys={nextKeys}
+                    setNextKeys={setNextKeys}
+                    lang={lang}
+                    setLang={setLang}
+                />
             </div>
         </div>
     );
 }
 
+//Helper functions:
 function randomItemOfArray(array: any[]) {
     return array[Math.floor(Math.random() * array.length)]
 }
 
-function createWeights(min: number, max: number, result: number[], key: Key) {
+function createWeights(min: number, max: number, result: number[]) {
     //NOTE: udelat
     var weights = []
     for (var i = min; i <= max; i++) {
@@ -146,41 +184,27 @@ function createWeights(min: number, max: number, result: number[], key: Key) {
         }
         weights.push({ weight, index: i })
     }
-    console.log(weights)
     return weights
 }
 
-function randomIndexOfArray(minS: string, maxS: string, result: number[], key: Key) {
+function randomIndexOfArray(minS: string, maxS: string, result: number[], key: Key[]) {
     //filter inputs
     var min = parseInt(minS) - 1
     var max = parseInt(maxS) - 1
-    if (min < 0 || max > 117 || min >= max) {
-        alert("Chyba výběru")
+    if (min < 0 || max > key.keys.length || min >= max) {
+        alert(`Invalid values in "Select questions from to"`)
         return 0
     }
 
-    //var number = Math.floor(Math.random() * (max - min)) + min
     //proces inputs
-    var number = weightedAverage(createWeights(min, max, result, key))
+    var number = weightedAverage(createWeights(min, max, result))
     return number
 }
-
-// function randomIndexOfArray(minS: string, maxS: string) {
-//     var min = parseInt(minS) - 1
-//     var max = parseInt(maxS) - 1
-//     if (min < 0 || max > 117 || min >= max) {
-//         alert("Chyba výběru")
-//         return 0
-//     }
-
-//     var number = Math.floor(Math.random() * (max - min)) + min
-//     return number
-// }
 
 function capitalizeFirst(str: string) {
     return str[0].toUpperCase() + str.slice(1)
 }
-//stack overflox yoinkadge
+
 var defaultDiacriticsRemovalMap = [
     { 'base': 'A', 'letters': '\u0041\u24B6\uFF21\u00C0\u00C1\u00C2\u1EA6\u1EA4\u1EAA\u1EA8\u00C3\u0100\u0102\u1EB0\u1EAE\u1EB4\u1EB2\u0226\u01E0\u00C4\u01DE\u1EA2\u00C5\u01FA\u01CD\u0200\u0202\u1EA0\u1EAC\u1EB6\u1E00\u0104\u023A\u2C6F' },
     { 'base': 'AA', 'letters': '\uA732' },
@@ -279,7 +303,6 @@ for (var i = 0; i < defaultDiacriticsRemovalMap.length; i++) {
     }
 }
 
-// "what?" version ... http://jsperf.com/diacritics/12
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function removeDiacritics(str: string) {
     // eslint-disable-next-line no-control-regex
@@ -287,9 +310,4 @@ function removeDiacritics(str: string) {
         //@ts-expect-error
         return diacriticsMap[a] || a;
     });
-}
-
-
-var chyba = (code: string) => {
-    alert(`Onřej to zase posral, tohle by mu snad mělo pomoct opravit tento problém: ${code}`)
 }
