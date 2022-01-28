@@ -1,0 +1,25 @@
+{
+  "files": {
+    "main.css": "/zkouseni/static/css/main.600b8447.chunk.css",
+    "main.js": "/zkouseni/static/js/main.909f0bab.chunk.js",
+    "main.js.map": "/zkouseni/static/js/main.909f0bab.chunk.js.map",
+    "runtime-main.js": "/zkouseni/static/js/runtime-main.df52c644.js",
+    "runtime-main.js.map": "/zkouseni/static/js/runtime-main.df52c644.js.map",
+    "static/js/2.7744004c.chunk.js": "/zkouseni/static/js/2.7744004c.chunk.js",
+    "static/js/2.7744004c.chunk.js.map": "/zkouseni/static/js/2.7744004c.chunk.js.map",
+    "static/js/3.7c029881.chunk.js": "/zkouseni/static/js/3.7c029881.chunk.js",
+    "static/js/3.7c029881.chunk.js.map": "/zkouseni/static/js/3.7c029881.chunk.js.map",
+    "index.html": "/zkouseni/index.html",
+    "static/css/main.600b8447.chunk.css.map": "/zkouseni/static/css/main.600b8447.chunk.css.map",
+    "static/js/2.7744004c.chunk.js.LICENSE.txt": "/zkouseni/static/js/2.7744004c.chunk.js.LICENSE.txt",
+    "static/media/close.c39ccb73.svg": "/zkouseni/static/media/close.c39ccb73.svg",
+    "static/media/cz.5a24757d.svg": "/zkouseni/static/media/cz.5a24757d.svg",
+    "static/media/gb.516897fd.svg": "/zkouseni/static/media/gb.516897fd.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.df52c644.js",
+    "static/js/2.7744004c.chunk.js",
+    "static/css/main.600b8447.chunk.css",
+    "static/js/main.909f0bab.chunk.js"
+  ]
+}

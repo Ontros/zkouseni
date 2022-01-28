@@ -1,0 +1,478 @@
+{
+    "key1": "Název",
+    "key2": "Zkratka",
+    "keys": [
+        {
+            "a": "H",
+            "b": "vodík"
+        },
+        {
+            "a": "He",
+            "b": "helium"
+        },
+        {
+            "a": "Li",
+            "b": "lithium"
+        },
+        {
+            "a": "Be",
+            "b": "beryllium"
+        },
+        {
+            "a": "B",
+            "b": "bor"
+        },
+        {
+            "a": "C",
+            "b": "uhlík"
+        },
+        {
+            "a": "N",
+            "b": "dusík"
+        },
+        {
+            "a": "O",
+            "b": "kyslík"
+        },
+        {
+            "a": "F",
+            "b": "fluor"
+        },
+        {
+            "a": "Ne",
+            "b": "neon"
+        },
+        {
+            "a": "Na",
+            "b": "sodík"
+        },
+        {
+            "a": "Mg",
+            "b": "hořčík"
+        },
+        {
+            "a": "Al",
+            "b": "hliník"
+        },
+        {
+            "a": "Si",
+            "b": "křemík"
+        },
+        {
+            "a": "P",
+            "b": "fosfor"
+        },
+        {
+            "a": "S",
+            "b": "síra"
+        },
+        {
+            "a": "Cl",
+            "b": "chlor"
+        },
+        {
+            "a": "Ar",
+            "b": "argon"
+        },
+        {
+            "a": "K",
+            "b": "draslík"
+        },
+        {
+            "a": "Ca",
+            "b": "vápník"
+        },
+        {
+            "a": "Sc",
+            "b": "skandium"
+        },
+        {
+            "a": "Ti",
+            "b": "titan"
+        },
+        {
+            "a": "V",
+            "b": "vanad"
+        },
+        {
+            "a": "Cr",
+            "b": "chrom"
+        },
+        {
+            "a": "Mn",
+            "b": "mangan"
+        },
+        {
+            "a": "Fe",
+            "b": "železo"
+        },
+        {
+            "a": "Co",
+            "b": "kobalt"
+        },
+        {
+            "a": "Ni",
+            "b": "nikl"
+        },
+        {
+            "a": "Cu",
+            "b": "měď"
+        },
+        {
+            "a": "Zn",
+            "b": "zinek"
+        },
+        {
+            "a": "Ga",
+            "b": "gallium"
+        },
+        {
+            "a": "Ge",
+            "b": "germanium"
+        },
+        {
+            "a": "As",
+            "b": "arsen"
+        },
+        {
+            "a": "Se",
+            "b": "selen"
+        },
+        {
+            "a": "Br",
+            "b": "brom"
+        },
+        {
+            "a": "Kr",
+            "b": "krypton"
+        },
+        {
+            "a": "Rb",
+            "b": "rubidium"
+        },
+        {
+            "a": "Sr",
+            "b": "stroncium"
+        },
+        {
+            "a": "Y",
+            "b": "yttrium"
+        },
+        {
+            "a": "Zr",
+            "b": "zirkonium"
+        },
+        {
+            "a": "Nb",
+            "b": "niob"
+        },
+        {
+            "a": "Mo",
+            "b": "molybden"
+        },
+        {
+            "a": "Tc",
+            "b": "technecium"
+        },
+        {
+            "a": "Ru",
+            "b": "ruthenium"
+        },
+        {
+            "a": "Rh",
+            "b": "rhodium"
+        },
+        {
+            "a": "Pd",
+            "b": "palladium"
+        },
+        {
+            "a": "Ag",
+            "b": "stříbro"
+        },
+        {
+            "a": "Cd",
+            "b": "kadmium"
+        },
+        {
+            "a": "In",
+            "b": "indium"
+        },
+        {
+            "a": "Sn",
+            "b": "cín"
+        },
+        {
+            "a": "Sb",
+            "b": "antimon"
+        },
+        {
+            "a": "Te",
+            "b": "tellur"
+        },
+        {
+            "a": "I",
+            "b": "jod"
+        },
+        {
+            "a": "Xe",
+            "b": "xenon"
+        },
+        {
+            "a": "Cs",
+            "b": "cesium"
+        },
+        {
+            "a": "Ba",
+            "b": "baryum"
+        },
+        {
+            "a": "La",
+            "b": "lanthan"
+        },
+        {
+            "a": "Ce",
+            "b": "cer"
+        },
+        {
+            "a": "Pr",
+            "b": "praseodym"
+        },
+        {
+            "a": "Nd",
+            "b": "neodym"
+        },
+        {
+            "a": "Pm",
+            "b": "promethium"
+        },
+        {
+            "a": "Sm",
+            "b": "samarium"
+        },
+        {
+            "a": "Eu",
+            "b": "europium"
+        },
+        {
+            "a": "Gd",
+            "b": "gadolinium"
+        },
+        {
+            "a": "Tb",
+            "b": "terbium"
+        },
+        {
+            "a": "Dy",
+            "b": "dysprosium"
+        },
+        {
+            "a": "Ho",
+            "b": "holmium"
+        },
+        {
+            "a": "Er",
+            "b": "erbium"
+        },
+        {
+            "a": "Tm",
+            "b": "thulium"
+        },
+        {
+            "a": "Yb",
+            "b": "ytterbium"
+        },
+        {
+            "a": "Lu",
+            "b": "lutecium"
+        },
+        {
+            "a": "Hf",
+            "b": "hafnium"
+        },
+        {
+            "a": "Ta",
+            "b": "tantal"
+        },
+        {
+            "a": "W",
+            "b": "wolfram"
+        },
+        {
+            "a": "Re",
+            "b": "rhenium"
+        },
+        {
+            "a": "Os",
+            "b": "osmium"
+        },
+        {
+            "a": "Ir",
+            "b": "iridium"
+        },
+        {
+            "a": "Pt",
+            "b": "platina"
+        },
+        {
+            "a": "Au",
+            "b": "zlato"
+        },
+        {
+            "a": "Hg",
+            "b": "rtuť"
+        },
+        {
+            "a": "Tl",
+            "b": "thallium"
+        },
+        {
+            "a": "Pb",
+            "b": "olovo"
+        },
+        {
+            "a": "Bi",
+            "b": "bismut"
+        },
+        {
+            "a": "Po",
+            "b": "polonium"
+        },
+        {
+            "a": "At",
+            "b": "astat"
+        },
+        {
+            "a": "Rn",
+            "b": "radon"
+        },
+        {
+            "a": "Fr",
+            "b": "francium"
+        },
+        {
+            "a": "Ra",
+            "b": "radium"
+        },
+        {
+            "a": "Ac",
+            "b": "aktinium"
+        },
+        {
+            "a": "Th",
+            "b": "thorium"
+        },
+        {
+            "a": "Pa",
+            "b": "protaktinium"
+        },
+        {
+            "a": "U",
+            "b": "uran"
+        },
+        {
+            "a": "Np",
+            "b": "neptunium"
+        },
+        {
+            "a": "Pu",
+            "b": "plutonium"
+        },
+        {
+            "a": "Am",
+            "b": "americium"
+        },
+        {
+            "a": "Cm",
+            "b": "curium"
+        },
+        {
+            "a": "Bk",
+            "b": "berkelium"
+        },
+        {
+            "a": "Cf",
+            "b": "kalifornium"
+        },
+        {
+            "a": "Es",
+            "b": "einsteinium"
+        },
+        {
+            "a": "Fm",
+            "b": "fermium"
+        },
+        {
+            "a": "Md",
+            "b": "mendelevium"
+        },
+        {
+            "a": "No",
+            "b": "nobelium"
+        },
+        {
+            "a": "Lr",
+            "b": "lawrencium"
+        },
+        {
+            "a": "Rf",
+            "b": "rutherfordium"
+        },
+        {
+            "a": "Db",
+            "b": "dubnium"
+        },
+        {
+            "a": "Sg",
+            "b": "seaborgium"
+        },
+        {
+            "a": "Bh",
+            "b": "bohrium"
+        },
+        {
+            "a": "Hs",
+            "b": "hassium"
+        },
+        {
+            "a": "Mt",
+            "b": "meitnerium"
+        },
+        {
+            "a": "Ds",
+            "b": "darmstadtium"
+        },
+        {
+            "a": "Rg",
+            "b": "roentgenium"
+        },
+        {
+            "a": "Cn",
+            "b": "kopernicium"
+        },
+        {
+            "a": "Nh",
+            "b": "nihonium"
+        },
+        {
+            "a": "Fl",
+            "b": "flerovium"
+        },
+        {
+            "a": "Mc",
+            "b": "moscovium"
+        },
+        {
+            "a": "Lv",
+            "b": "livermorium"
+        },
+        {
+            "a": "Ts",
+            "b": "tennessin"
+        },
+        {
+            "a": "Og",
+            "b": "oganesson"
+        }
+    ]
+}
