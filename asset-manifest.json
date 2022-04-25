@@ -1,25 +1,25 @@
 {
   "files": {
-    "main.css": "/zkouseni/static/css/main.600b8447.chunk.css",
-    "main.js": "/zkouseni/static/js/main.909f0bab.chunk.js",
-    "main.js.map": "/zkouseni/static/js/main.909f0bab.chunk.js.map",
-    "runtime-main.js": "/zkouseni/static/js/runtime-main.df52c644.js",
-    "runtime-main.js.map": "/zkouseni/static/js/runtime-main.df52c644.js.map",
-    "static/js/2.7744004c.chunk.js": "/zkouseni/static/js/2.7744004c.chunk.js",
-    "static/js/2.7744004c.chunk.js.map": "/zkouseni/static/js/2.7744004c.chunk.js.map",
-    "static/js/3.7c029881.chunk.js": "/zkouseni/static/js/3.7c029881.chunk.js",
-    "static/js/3.7c029881.chunk.js.map": "/zkouseni/static/js/3.7c029881.chunk.js.map",
-    "index.html": "/zkouseni/index.html",
-    "static/css/main.600b8447.chunk.css.map": "/zkouseni/static/css/main.600b8447.chunk.css.map",
-    "static/js/2.7744004c.chunk.js.LICENSE.txt": "/zkouseni/static/js/2.7744004c.chunk.js.LICENSE.txt",
-    "static/media/close.c39ccb73.svg": "/zkouseni/static/media/close.c39ccb73.svg",
-    "static/media/cz.5a24757d.svg": "/zkouseni/static/media/cz.5a24757d.svg",
-    "static/media/gb.516897fd.svg": "/zkouseni/static/media/gb.516897fd.svg"
+    "main.css": "/static/css/main.7bd2471d.chunk.css",
+    "main.js": "/static/js/main.51939ddc.chunk.js",
+    "main.js.map": "/static/js/main.51939ddc.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.277aa9ab.js",
+    "runtime-main.js.map": "/static/js/runtime-main.277aa9ab.js.map",
+    "static/js/2.fc3ce8ed.chunk.js": "/static/js/2.fc3ce8ed.chunk.js",
+    "static/js/2.fc3ce8ed.chunk.js.map": "/static/js/2.fc3ce8ed.chunk.js.map",
+    "static/js/3.7c029881.chunk.js": "/static/js/3.7c029881.chunk.js",
+    "static/js/3.7c029881.chunk.js.map": "/static/js/3.7c029881.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.7bd2471d.chunk.css.map": "/static/css/main.7bd2471d.chunk.css.map",
+    "static/js/2.fc3ce8ed.chunk.js.LICENSE.txt": "/static/js/2.fc3ce8ed.chunk.js.LICENSE.txt",
+    "static/media/close.c39ccb73.svg": "/static/media/close.c39ccb73.svg",
+    "static/media/cz.9cfa729f.svg": "/static/media/cz.9cfa729f.svg",
+    "static/media/gb.3b671736.svg": "/static/media/gb.3b671736.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.df52c644.js",
-    "static/js/2.7744004c.chunk.js",
-    "static/css/main.600b8447.chunk.css",
-    "static/js/main.909f0bab.chunk.js"
+    "static/js/runtime-main.277aa9ab.js",
+    "static/js/2.fc3ce8ed.chunk.js",
+    "static/css/main.7bd2471d.chunk.css",
+    "static/js/main.51939ddc.chunk.js"
   ]
 }
