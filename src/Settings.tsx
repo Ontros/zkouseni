@@ -1,5 +1,5 @@
 import React, { useRef, useState } from 'react'
-import { Questionaire, Key } from './App'
+import { Questionaire, Key, Config } from './App'
 import { ReactComponent as Close } from './close.svg'
 import { CSSTransition } from 'react-transition-group'
 import { chyba, Lang, LanguageSelect } from './Utils'
@@ -17,18 +17,23 @@ type Props = {
     nextKeys: string[],
     setNextKeys: (arg0: string[]) => void,
     lang: number,
-    setLang: (arg0: number) => void
+    setLang: (arg0: number) => void,
+    config: Config
 }
 
 export default function Settings(props: Props) {
 
     //TODO:  Language, PUBLISH
     //chrome blue input outline
-    const { from, end, changeFrom, changeEnd, changeAskForSecond, questionaire, areSettingsOpen, setAreSettingsOpen, loadKeys, nextKeys, setNextKeys, lang, setLang } = props
+    const { from, end, changeFrom, config, changeEnd, changeAskForSecond, questionaire, areSettingsOpen, setAreSettingsOpen, loadKeys, nextKeys, setNextKeys, lang, setLang } = props
 
     const [keyPath, setKeyPath] = useState(localStorage.getItem('keyUrl') || '')
 
     const nextKeysRow = useRef()
+
+    var isSwitchable = typeof config.isSwitchable === "undefined" ? true : config.isSwitchable
+
+    console.log(isSwitchable)
 
     const updateNextKeys = () => {
         var arr = []
@@ -87,15 +92,20 @@ export default function Settings(props: Props) {
                         <input type="number" className="num-selection" value={from} onChange={changeFrom} />
                         <input type="number" className="num-selection" value={end} onChange={changeEnd} />
                     </div>
-                    <div className="text-input-title">{Lang(lang, ["Question -> Answer", "Otázka -> Odpověď"])}</div>
-                    <div className="settings-row space-around">
-                        <label className="radio-container">
-                            <input type="radio" value="1" name="quest" className="radio" onChange={changeAskForSecond} defaultChecked={true} /> {questionaire.key1}
-                        </label>
-                        <label className="radio-container">
-                            <input type="radio" value="2" name="quest" className="radio" onChange={changeAskForSecond} /> {questionaire.key2}
-                        </label>
-                    </div>
+                    {
+                        isSwitchable &&
+                        <>
+                            <div className="text-input-title">{Lang(lang, ["Question -> Answer", "Otázka -> Odpověď"])}</div>
+                            <div className="settings-row space-around">
+                                <label className="radio-container">
+                                    <input type="radio" value="1" name="quest" className="radio" onChange={changeAskForSecond} defaultChecked={true} /> {questionaire.key1}
+                                </label>
+                                <label className="radio-container">
+                                    <input type="radio" value="2" name="quest" className="radio" onChange={changeAskForSecond} /> {questionaire.key2}
+                                </label>
+                            </div>
+                        </>
+                    }
                     <div className="text-input-title">{Lang(lang, ["Skip to next question by:", "Přeskoč na další otázku pomocí:"])}</div>
                     {/*@ts-expect-error*/}
                     <div className="settings-row space-around" ref={nextKeysRow}>

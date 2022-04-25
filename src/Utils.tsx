@@ -35,10 +35,7 @@ function LanguageSelect(props: LangProps) {
     ]
 
     return (
-        <div className="language-selection" onClick={() => {
-            setLang(lang < languages.length - 1 ? lang + 1 : 0)
-        }
-        }>
+        <div className="language-selection" onClick={() => { setLang(lang < languages.length - 1 ? lang + 1 : 0) }}>
             <img src={languages[lang].flag} alt="Flag" className='flag' />
             {languages[lang].name}
         </div>

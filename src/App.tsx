@@ -11,7 +11,14 @@ import { Lang } from './Utils'
 export type Questionaire = {
     key1: string,
     key2: string,
-    keys: Key
+    keys: Key,
+    config: Config
+}
+
+export type Config = {
+    isSwitchable?: boolean,
+    allowCustomAnswers?: boolean,
+    predefinedAnswers?: string[]
 }
 
 const wrongURL = (lang: number) => {
@@ -55,7 +62,7 @@ function App() {
     }
 
     //Answer keys
-    const [key, setKey] = useState<Questionaire>({ key1: "error", key2: "error", keys: [] })
+    const [key, setKey] = useState<Questionaire>({ key1: "error", key2: "error", keys: [], config: {} })
     const [isLoading, setIsLoading] = useState<boolean>(true)
     //Language ID
     const [lang, setLang] = useState(detectBrowserLanguage().substring(0, 2).toLowerCase() === 'cs' ? 1 : 0) //1 = czech; 0 = english

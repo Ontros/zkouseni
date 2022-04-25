@@ -4,6 +4,7 @@ import { Questionaire, Key } from './App'
 import Settings from './Settings'
 import weightedAverage from './weightedAverage'
 import { chyba, Lang } from './Utils'
+import { collapseTextChangeRangesAcrossMultipleVersions } from 'typescript'
 
 type Props = {
     questionaire: Questionaire;
@@ -95,10 +96,21 @@ export default function Selection(props: Props) {
         }
     }
 
-    const moveToNextQuestion = () => {
+    const moveToNextQuestionVoid = () => {
+        moveToNextQuestion()
+    }
 
+    const moveToNextQuestion = (predefined?: string) => {
+        console.log("predefined", predefined)
+
+        if (typeof predefined === "string") {
+            var inputString = predefined
+        }
+        else {
+            var inputString = answerInputString
+        }
         //correct
-        if (removeDiacritics(answerInputString.toLocaleLowerCase()).trim() === removeDiacritics(answer.toLocaleLowerCase()).trim()) {
+        if (removeDiacritics(inputString.toLocaleLowerCase()).trim() === removeDiacritics(answer.toLocaleLowerCase()).trim()) {
             setIsCorrect(true)
             setFeedbackString(`${Lang(lang, ["Correct", "Dobře"])} ${question} (${questionIndex + 1}) = ${answer}`)
             var newResult = questionCorrectnessArray
@@ -131,6 +143,7 @@ export default function Selection(props: Props) {
         }
         setQuestionIndex(index)
     }
+    var isSwitchable = typeof questionaire.config.isSwitchable === "undefined" ? true : questionaire.config.isSwitchable
 
     var onOpenerClick = (event: any) => {
         setAreSettingsOpen(!areSettingsOpen)
@@ -143,9 +156,21 @@ export default function Selection(props: Props) {
                     <div className="zadani">{`${capitalizeFirst(question)} ${questionCorrectnessArray[questionIndex]}`}</div>
                     <button className={`button button-clear`} onClick={onOpenerClick}>{`⚙️`}</button>
                 </div>
-                <input className="text-input" type="text" value={answerInputString} onKeyDown={inputKeyDown} onChange={changeAnswerInput} />
+                <div className="selection-row space-between" style={{ marginTop: ".5em" }}>
+                    {questionaire.config.predefinedAnswers?.map((predefined, index) => {
+                        return (
+                            <button className='button' style={{ marginRight: ".5em" }} onClick={() => {
+                                setAnswerInputString(predefined)
+                                moveToNextQuestion(predefined)
+                            }} key={index}>{predefined}</button>
+                        )
+                    })}
+                </div>
+                {isSwitchable &&
+                    <input className="text-input" type="text" value={answerInputString} onKeyDown={inputKeyDown} onChange={changeAnswerInput} />
+                }
                 <div className="selection-row last-selection-row">
-                    <button className="button" onClick={moveToNextQuestion}>{Lang(lang, ["Confirm", "Potvrdit"])}</button>
+                    {isSwitchable && <button className="button" onClick={moveToNextQuestionVoid}>{Lang(lang, ["Confirm", "Potvrdit"])}</button>}
                     <div className={`result-text correctness-${isCorrect}`} >{feedbackString}</div>
                 </div>
                 <Settings
@@ -163,6 +188,7 @@ export default function Selection(props: Props) {
                     setNextKeys={setNextKeys}
                     lang={lang}
                     setLang={setLang}
+                    config={questionaire.config}
                 />
             </div>
         </div>
