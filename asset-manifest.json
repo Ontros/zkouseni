@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/zkouseni/static/css/main.7bd2471d.chunk.css",
-    "main.js": "/zkouseni/static/js/main.51939ddc.chunk.js",
-    "main.js.map": "/zkouseni/static/js/main.51939ddc.chunk.js.map",
+    "main.css": "/zkouseni/static/css/main.88ed9afd.chunk.css",
+    "main.js": "/zkouseni/static/js/main.db5ec81e.chunk.js",
+    "main.js.map": "/zkouseni/static/js/main.db5ec81e.chunk.js.map",
     "runtime-main.js": "/zkouseni/static/js/runtime-main.df52c644.js",
     "runtime-main.js.map": "/zkouseni/static/js/runtime-main.df52c644.js.map",
     "static/js/2.fc3ce8ed.chunk.js": "/zkouseni/static/js/2.fc3ce8ed.chunk.js",
@@ -10,7 +10,7 @@
     "static/js/3.7c029881.chunk.js": "/zkouseni/static/js/3.7c029881.chunk.js",
     "static/js/3.7c029881.chunk.js.map": "/zkouseni/static/js/3.7c029881.chunk.js.map",
     "index.html": "/zkouseni/index.html",
-    "static/css/main.7bd2471d.chunk.css.map": "/zkouseni/static/css/main.7bd2471d.chunk.css.map",
+    "static/css/main.88ed9afd.chunk.css.map": "/zkouseni/static/css/main.88ed9afd.chunk.css.map",
     "static/js/2.fc3ce8ed.chunk.js.LICENSE.txt": "/zkouseni/static/js/2.fc3ce8ed.chunk.js.LICENSE.txt",
     "static/media/close.c39ccb73.svg": "/zkouseni/static/media/close.c39ccb73.svg",
     "static/media/cz.9cfa729f.svg": "/zkouseni/static/media/cz.9cfa729f.svg",
@@ -19,7 +19,7 @@
   "entrypoints": [
     "static/js/runtime-main.df52c644.js",
     "static/js/2.fc3ce8ed.chunk.js",
-    "static/css/main.7bd2471d.chunk.css",
-    "static/js/main.51939ddc.chunk.js"
+    "static/css/main.88ed9afd.chunk.css",
+    "static/js/main.db5ec81e.chunk.js"
   ]
 }
